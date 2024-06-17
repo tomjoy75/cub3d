@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjoyeux <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:52:57 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/01/15 21:22:06 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/17 17:31:49 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int		ft_printf(const char *format, ...);
 #  define BUFFER_SIZE 5
 # endif
 
-char	*get_next_line(int fd, int purge);
+char	*ft_get_next_line(int fd, int purge);
 char	*ft_strjoin_gnl(char **s1, char const *s2);
 char	*extract_line(char **stash);
 
