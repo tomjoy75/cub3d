@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_get_next_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjoyeux <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 12:58:06 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/01/16 22:25:52 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/17 17:29:13 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*extract_line(char **stash)
 	return (line);
 }
 
-char	*get_next_line(int fd, int purge)
+char	*ft_get_next_line(int fd, int purge)
 {
 	static char	*stash;
 	char		*line;
