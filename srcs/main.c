@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 15:26:36 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/18 16:44:51 by tjoyeux          ###   ########.fr       */
+/*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
+/*   Updated: 2024/06/17 18:14:00 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
-# include "libft.h"
-# include "parsing.h"
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
+#include "cub3d.h"
 
-#endif
+int	main(int argc, char **argv)
+{
+	//1. Check arguments (return fd ???)
+	//2. Create linked list
+	//3. Parse linked list
+ 
+	return (0);
+}
