@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+         #
+#    By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 14:45:46 by tjoyeux           #+#    #+#              #
-#    Updated: 2024/06/19 17:16:41 by tjoyeux          ###   ########.fr        #
+#    Updated: 2024/06/19 23:00:59 by joyeux           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,31 +29,18 @@ $(NAME) : $(OBJ)
 	@echo "$(MAGENTA)$(BOLD)Creation archive: $(RESET)$(BLUE)$(ITALIC)$@$(RESET)" 
 	ar -rcs $@ $^
 
-bonus : $(OBJ) $(OBJ_BONUS)
+bonus : $(NAME) $(BONUS_FLAG)
+
+$(BONUS_FLAG): $(OBJ_BONUS)
+	@echo "$(MAGENTA)$(BOLD)Adding bonus to archive: $(RESET)$(BLUE)$(ITALIC)$@$(RESET)" 
+	ar -rcs $(NAME) $(OBJ_BONUS)
 	@touch $(BONUS_FLAG)
-	@$(MAKE) $(NAME)
-
-$(NAME) : $(OBJ) $(OBJ_BONUS) $(BONUS_FLAG)
-	@echo "$(MAGENTA)$(BOLD)Creation archive with bonus: $(RESET)$(BLUE)$(ITALIC)$@$(RESET)" 
-	ar -rcs $@ $(OBJ) $(OBJ_BONUS)
-#	@mv $(NAME) $(NAME_BONUS)
-#	ar -rcs $(NAME) $^
-#	ar -rcs $@ $^
-
-#%o : %c libft.h
+	
 $(SRC_PATH)/%.o : $(SRC_PATH)/%.c libft.h
 	@echo "$(MAGENTA)$(BOLD)Compilation: $(RESET)$(BLUE)$(ITALIC)$<$(RESET)" 
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# $(SRC_PATH)/%.o : $(SRC_PATH)/%.c libft.h
-# 	@echo "$(MAGENTA)$(BOLD)Compilation: $(RESET)$(BLUE)$(ITALIC)$<$(RESET)" 
-# 	$(CC) $(CFLAGS) -c $< -o $@
-
-# $(OBJ_BONUS) : $(SRC_BONUS) libft.h
-# 	$(CC) $(CFLAGS) -c $< -o $@
-
 clean :
-#	rm -f $(SRC_PATH)/*.o
 	rm -f $(OBJ) $(OBJ_BONUS) $(BONUS_FLAG)
 
 fclean : clean
