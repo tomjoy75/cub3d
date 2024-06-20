@@ -1,20 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   check_lines.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 18:05:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/20 14:15:06 by tjoyeux          ###   ########.fr       */
+/*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
+/*   Updated: 2024/06/20 15:36:10 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "cub3d.h"
 
-int cb_check_args(int argc, char** argv);
-t_list	*cb_build_linked_list(int fd);
-void	cb_error_msg(char *msg);
+int	is_valid_color_line(char *str)
+{
+	
+	return (1);
+}
 
-#endif
+int is_valid_texture_line(char *str)
+{
+
+	return (1);
+}
+
+int is_space_line(char *str)
+{
+
+	return (1);
+}
+
+// there should be only '0,'1',' ', 'N''S''E'or 'W' (only one in the map)
+int	is_valid_map_line(char *str)
+{
+
+	return (1);
+}

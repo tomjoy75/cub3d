@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:13:37 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/20 10:32:50 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/20 15:01:14 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,12 @@ int cb_check_args(int argc, char** argv)
 	int		fd;
 
 	if (argc != 2)
-	{		
-		printf("usage: ./cub3D arg1(*.cub)\n");
-		exit(EXIT_FAILURE);
-	}
+		cb_error_msg("usage: ./cub3D arg1(*.cub)");
 	if (!_check_suffix_ok(argv[1]))
-	{
-		printf("Wrong input data\n");
-		exit(EXIT_FAILURE);
-	}
+		cb_error_msg("Wrong input data");
 	fd = open(argv[1], O_RDONLY);
 	if (0 >= fd)
-	{
-		printf("File not found\n");
-		exit(EXIT_FAILURE);
-	}
+		cb_error_msg("File not found");
 	return (fd);
 }
 
@@ -61,6 +52,7 @@ t_list	*cb_build_linked_list(int fd)
 			break;
 //		printf("Line %d : %s\n", count, next_line);
 		new_node = ft_lstnew((void *)next_line);
+		//TODO: case retour NULL -> free nodes and exit
 		ft_lstadd_back(&parsed_lines, new_node);
 //		count++;
 	}	

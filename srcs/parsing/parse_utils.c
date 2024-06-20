@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/17 18:05:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/20 14:15:06 by tjoyeux          ###   ########.fr       */
+/*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
+/*   Updated: 2024/06/20 14:27:03 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "cub3d.h"
 
-int cb_check_args(int argc, char** argv);
-t_list	*cb_build_linked_list(int fd);
-void	cb_error_msg(char *msg);
-
-#endif
+void	cb_error_msg(char *msg)
+{
+	printf(RED"Error\n"RESET);
+	printf(ITALIC"\t%s\n"RESET, msg);
+	exit(EXIT_FAILURE);
+}
