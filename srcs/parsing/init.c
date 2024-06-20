@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:13:37 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/18 14:50:19 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/20 10:32:50 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,30 @@ int cb_check_args(int argc, char** argv)
 	return (fd);
 }
 
-void	cb_build_linked_list(int fd)
+t_list	*cb_build_linked_list(int fd)
 {
 	char	*next_line;
+	t_list	*parsed_lines;
+	t_list	*new_node;
 	int		count;
 	
-	count = 0;
+//	count = 0;
+	parsed_lines = NULL;
 	while (1)
 	{
 		next_line = ft_get_next_line(fd, 0);
 		if (next_line == NULL)
 			break;
-		printf("Line %d : %s\n", count, next_line);
-		count++;
+//		printf("Line %d : %s\n", count, next_line);
+		new_node = ft_lstnew((void *)next_line);
+		ft_lstadd_back(&parsed_lines, new_node);
+//		count++;
 	}	
 	close(fd);
+	return (parsed_lines);
 }
+
+
 /*
 int	main (int argc, char **argv)
 {
