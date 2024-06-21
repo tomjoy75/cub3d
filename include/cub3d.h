@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:26:36 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/20 14:26:26 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/21 13:44:10 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,18 @@
 # define ITALIC		"\x1b[1;3m"
 # define RESET		"\x1b[0m"
 
+typedef struct s_data
+{
+	char	*no_text;
+	char	*so_text;	
+	char	*we_text;	
+	char	*ea_text;	
+	int		f_color[3];
+	int		c_color[3];
+	int**	map;
+	int		pos_x;
+	int		pos_y;
+	char	orientation;
+}				t_data;
+ 
 #endif

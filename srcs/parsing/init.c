@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:13:37 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/20 15:01:14 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/21 15:53:14 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int cb_check_args(int argc, char** argv)
 t_list	*cb_build_linked_list(int fd)
 {
 	char	*next_line;
+//	char	*last_char;
 	t_list	*parsed_lines;
 	t_list	*new_node;
 	int		count;
@@ -50,10 +51,12 @@ t_list	*cb_build_linked_list(int fd)
 		next_line = ft_get_next_line(fd, 0);
 		if (next_line == NULL)
 			break;
+//		last_char = ft_strchr(next_line, '\n');
+//		*last_char = '\0';
 //		printf("Line %d : %s\n", count, next_line);
 		new_node = ft_lstnew((void *)next_line);
 		//TODO: case retour NULL -> free nodes and exit
-		ft_lstadd_back(&parsed_lines, new_node);
+		ft_lstadd_front(&parsed_lines, new_node);
 //		count++;
 	}	
 	close(fd);
