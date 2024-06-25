@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:26:36 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/21 13:44:10 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/25 16:04:42 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 # include "libft.h"
 # include "parsing.h"
 # include <stdio.h>
+# include <string.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <errno.h>
 
 # define BLACK		"\x1b[1;30m"
 # define RED		"\x1b[1;31m"
@@ -38,6 +40,8 @@ typedef struct s_data
 	int		f_color[3];
 	int		c_color[3];
 	int**	map;
+	int		map_len;
+	int		map_height;
 	int		pos_x;
 	int		pos_y;
 	char	orientation;
