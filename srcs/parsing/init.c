@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:13:37 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/21 15:53:14 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/26 18:11:39 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_list	*cb_build_linked_list(int fd)
 		next_line = ft_get_next_line(fd, 0);
 		if (next_line == NULL)
 			break;
+		replace_newline_by_null(next_line);
 //		last_char = ft_strchr(next_line, '\n');
 //		*last_char = '\0';
 //		printf("Line %d : %s\n", count, next_line);

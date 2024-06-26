@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/25 18:52:44 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/27 00:21:19 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,18 @@ t_data	*parse_cub_file(t_list *list)
 		printf("line %d: %s\n", ++count, (char *)list->content);
 		if (map_phase)
 		{
-			if (!is_valid_map_line((char *)list->content))
+			if (!is_valid_map_line((char *)list->content) || is_space_line((char *)list->content))
+			{
 				map_phase = 0;
-//				cb_error_msg("Not a valid map line");
+				printf("Hauteur map : %d\n", data->map_height);
+				printf("Largeur map : %d\n", data->map_len);
+			}
 			else
-			//TODO: incrementer le nb de lignes du tableau et enregistrer la ligne la plus longue
+			{
+				data->map_height++;
+				if (ft_strlen((char *)list->content) > data->map_len)
+					data->map_len = ft_strlen((char *)list->content);
+			}
 		}
 		if (!map_phase)
 		{
@@ -42,7 +49,7 @@ t_data	*parse_cub_file(t_list *list)
 				free (data);	
 				cb_error_msg("Not a valid file");
 			}
-			else
+//			else
 			//TODO: actualiser t_data, si l'element existe deja, lever une erreur 
 		}
 		list = list->next;
