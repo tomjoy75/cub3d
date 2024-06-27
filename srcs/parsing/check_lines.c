@@ -6,11 +6,12 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/25 15:54:42 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/27 18:03:27 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "parsing.h"
 
 
 int	is_whitespace(char c)
@@ -18,21 +19,30 @@ int	is_whitespace(char c)
 	return ((c >= 9 && c <= 13) || c == 32);
 }
 
-int	is_valid_color_line(char *str)
+int	is_valid_color_line(char *str, t_flag *flag, t_data *data)
 {
 	int	n;
-	int count;
+//	int count;
+	int	index;
+	char	elem;
 
 	n = 0;
-	count = 3;
+	index = 0;
+//	count = 3;
 //	while (is_whitespace(*str))
 //		str++;
 	if (*str != 'F' && *str != 'C')
 		return (0);
+	else
+		elem = *str;
+/*	else if (*str == 'F')
+		flag->f_color_flag++;
+	else if (*str == 'C')
+		flag->c_color_flag++;*/
 	str++;
 	while (is_whitespace(*str))
 		str++;
-	while (count > 0)
+	while (index < 3)
 	{
 		if (!ft_isdigit(*str))
 			return (0);
@@ -44,11 +54,22 @@ int	is_valid_color_line(char *str)
 		}
 		if (n > 255 || n < 0)
 			return (0);
+		else if (elem == 'F')
+		{
+			flag->f_color_flag++;
+			data->f_color[index] = n;	
+		} 
+		else if (elem == 'C')
+		{
+			flag->c_color_flag++;
+			data->c_color[index] = n;	
+		} 
 		n = 0;
-		if (*str != ',' && count > 1)
+		index++;
+		if (*str != ',' && index < 3)
 			return (0);
 		str++;
-		count--;
+//		count--;
 	}
 //	while (is_whitespace(*str))
 //		str++;
@@ -58,12 +79,20 @@ int	is_valid_color_line(char *str)
 		return (*str = '\0', 0);
 }
 
-int is_valid_texture_line(char *str)
+int is_valid_texture_line(char *str, t_flag *flag)
 {
 	int	fd;
 	
 	if (ft_strncmp(str, "NO", 2) && ft_strncmp(str, "SO", 2) && ft_strncmp(str, "WE", 2) && ft_strncmp(str, "EA", 2))
 		return (0);
+	else if (!ft_strncmp(str, "NO", 2))
+		flag->no_texture_flag++;
+	else if (!ft_strncmp(str, "SO", 2))
+		flag->so_texture_flag++;
+	else if (!ft_strncmp(str, "WE", 2))
+		flag->we_texture_flag++;
+	else if (!ft_strncmp(str, "EA", 2))
+		flag->ea_texture_flag++;
 	str += 2;
 	if (!is_whitespace(*str))
 		return (0);
@@ -74,6 +103,7 @@ int is_valid_texture_line(char *str)
 //		strerror(stderr);
 //		cb_error_msg("File not found or no authorization");
 		cb_error_msg(strerror(errno));
+	close (fd);
 	return (1);
 }
 
@@ -89,9 +119,9 @@ int is_space_line(char *str)
 }
 
 // Check for elements space_line, texture_line, color_line
-int is_valid_element_line(char *str)
+int is_valid_element_line(char *str, t_flag *flag, t_data *data)
 {
-	if (is_space_line(str) || is_valid_color_line(str) || is_valid_texture_line(str))
+	if (is_space_line(str) || is_valid_color_line(str, flag, data) || is_valid_texture_line(str, flag))
 		return (1);
 	else
 		return (0);	
@@ -108,6 +138,18 @@ int	is_valid_map_line(char *str)
 	}
 	return (1);
 }
+/*
+void	actualise_data_elements(char *str, t_data *data)
+{
+	if (is_valid_color_line(str)) 	
+	{
+		
+	}
+	else if (is_valid_texture_line(str))
+	{
+
+	}
+}*/
 /*
 #include <stdio.h>
 int main (int argc, char **argv)

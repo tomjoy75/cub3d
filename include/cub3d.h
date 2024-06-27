@@ -6,14 +6,13 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:26:36 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/25 16:04:42 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/27 18:01:33 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 # include "libft.h"
-# include "parsing.h"
 # include <stdio.h>
 # include <string.h>
 # include <stdlib.h>

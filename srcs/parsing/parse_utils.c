@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/26 18:10:26 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/06/27 18:03:37 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "parsing.h"
 
 void	cb_error_msg(char *msg)
 {
@@ -37,4 +38,18 @@ void	replace_newline_by_null(char *str)
 		}
 		str++;
 	}
+}
+
+int	all_flags_set(t_flag flag)
+{
+	if (flag.c_color_flag == 1 && flag.f_color_flag == 1 && flag.ea_texture_flag == 1 && flag.no_texture_flag == 1 && flag.so_texture_flag == 1 && flag.we_texture_flag == 1)
+		return (1);
+	return (0);
+}
+
+void print_flags(t_flag flag)
+{
+	printf("Color flags :\n\tc_color = %d\n\tf_color = %d\n", flag.c_color_flag, flag.f_color_flag);
+	printf("Texture flags :\n\tea_texture = %d\n\tno_texture = %d\n\twe_texture = %d\n\tso_texture = %d\n", flag.ea_texture_flag, flag.no_texture_flag, flag.we_texture_flag, flag.so_texture_flag);
+	
 }

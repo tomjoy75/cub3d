@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:13:37 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/26 18:11:39 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/06/27 18:03:31 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "parsing.h"
 
 static int _check_suffix_ok(char *argv)
 {

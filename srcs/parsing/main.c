@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/27 00:41:08 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/06/27 18:06:20 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "parsing.h"
+
 
 t_data	*parse_cub_file(t_list *list)
 {
 	int		count;
 	int		map_phase;
 	t_data	*data;
+	t_flag	flag;
 
 	count = 0;
 	map_phase = 1;
@@ -24,6 +27,7 @@ t_data	*parse_cub_file(t_list *list)
 	if (!data)
 		return (NULL);
 	ft_memset((void *)data, 0, sizeof(data));
+	ft_memset(&flag, 0, sizeof(t_flag));
 	while (list)
 	{
 		printf("line %d: %s\n", ++count, (char *)list->content);
@@ -44,18 +48,32 @@ t_data	*parse_cub_file(t_list *list)
 		}
 		if (!map_phase)
 		{
-			if (!is_valid_element_line((char *)list->content))
+			if (!is_valid_element_line((char *)list->content, &flag, data))
 			{
 				free (data);	
 				cb_error_msg("Not a valid file");
 			}
-//			else
-			//TODO: actualiser t_data, si l'element existe deja, lever une erreur 
+		//	else
+			//TODO: actualiser t_data, si l'element existe deja, lever une erreur
+			//1. texture 
+			//2. color 
+			//3. map dimensions --DONE--
+			//4. flags --DONE--
+		/*	{
+				if (!is_space_line((char *)list->content))
+					actualise_data_elements((char *)list->content, data);
+			}*/
 		}
 		list = list->next;
 	}
 	//TODO: Y a t'il une map et un element de chaques? Chequer si les elements du tableau valent 0 ou NULL	
-	printf ("Valid file\n");
+	if (all_flags_set(flag))
+		printf ("Valid file\n");
+	else
+	{
+		print_flags(flag);
+		cb_error_msg("Problem in .cub file : There should be 1 and only 1 texture by orientation and only 1 color for floor and ceilling");
+	}
 	return (data);
 }
 
