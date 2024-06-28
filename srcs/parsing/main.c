@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/27 18:06:20 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/28 19:06:56 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 t_data	*parse_cub_file(t_list *list)
 {
-	int		count;
+//	int		count;
 	int		map_phase;
 	t_data	*data;
 	t_flag	flag;
 
-	count = 0;
+//	count = 0;
 	map_phase = 1;
 	data = malloc(sizeof(t_data));
 	if (!data)
@@ -30,10 +30,10 @@ t_data	*parse_cub_file(t_list *list)
 	ft_memset(&flag, 0, sizeof(t_flag));
 	while (list)
 	{
-		printf("line %d: %s\n", ++count, (char *)list->content);
+//		printf("line %d: %s\n", ++count, (char *)list->content);
 		if (map_phase)
 		{
-			if (!is_valid_map_line((char *)list->content) || is_space_line((char *)list->content))
+			if (!is_valid_map_line((char *)list->content, &flag) || is_space_line((char *)list->content))
 			{
 				map_phase = 0;
 				printf("Hauteur map : %d\n", data->map_height);
@@ -55,8 +55,8 @@ t_data	*parse_cub_file(t_list *list)
 			}
 		//	else
 			//TODO: actualiser t_data, si l'element existe deja, lever une erreur
-			//1. texture 
-			//2. color 
+			//1. texture --DONE-- 
+			//2. color --DONE--
 			//3. map dimensions --DONE--
 			//4. flags --DONE--
 		/*	{
@@ -69,11 +69,11 @@ t_data	*parse_cub_file(t_list *list)
 	//TODO: Y a t'il une map et un element de chaques? Chequer si les elements du tableau valent 0 ou NULL	
 	if (all_flags_set(flag))
 		printf ("Valid file\n");
-	else
+/*	else
 	{
 		print_flags(flag);
-		cb_error_msg("Problem in .cub file : There should be 1 and only 1 texture by orientation and only 1 color for floor and ceilling");
-	}
+		cb_error_msg("There should be 1 and only 1 texture by orientation and ");
+	}*/
 	return (data);
 }
 
@@ -90,9 +90,10 @@ int	main(int argc, char **argv)
 	parsed_lines = cb_build_linked_list(fd);
 	//3. Check linked list and create structure
 	data = parse_cub_file(parsed_lines);
-
+	print_data(data);
 	//4. Create map 
 	//5. Copy map
+	//5. Coordinates of player + empty his case 
 	//6. check map (walls all around + only one player) 	
  
 	return (0);
