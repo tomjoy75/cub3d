@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:18:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/28 13:10:33 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/29 23:40:44 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void print_flags(t_flag flag)
 void print_data(t_data *data)
 {
 	int	i;
+	int j;
 
 	i = 0;
 	printf("f_color : (");
@@ -45,4 +46,18 @@ void print_data(t_data *data)
 	printf("we texture : %s\n", data->we_text);	
 	printf("ea texture : %s\n", data->ea_text);	
 	printf("\nmap dimensions (l*h): %d * %d\n", data->map_len, data->map_height);
+	printf("player\tx : %d\n\ty : %d\n\torientation : %c\n", data->pos_x, data->pos_y, data->orientation);
+	printf("\n-------MAP-------\n");
+	i = 0;
+	while (i < data->map_height)	
+	{
+		j = 0;
+		while (j < data->map_len)
+		{
+			printf ("%+d ", data->map[i][j]);
+			j++;
+		}
+		i++;
+		printf("\n");
+	}
 }

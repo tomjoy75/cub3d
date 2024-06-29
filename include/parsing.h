@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:05:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/28 17:32:23 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/29 18:55:17 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,8 @@ int	is_valid_map_line(char *str, t_flag *flag);
 int is_valid_element_line(char *str, t_flag *flag, t_data *data);
 int is_space_line(char *str);
 //void	actualise_data_elements(char *str, t_data *data);
+
+//Map creation
+int	**create_map(t_data *data, t_list *list);
 
 #endif

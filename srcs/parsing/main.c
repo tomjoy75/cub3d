@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/28 19:06:56 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/29 20:30:24 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,9 @@ int	main(int argc, char **argv)
 	parsed_lines = cb_build_linked_list(fd);
 	//3. Check linked list and create structure
 	data = parse_cub_file(parsed_lines);
-	print_data(data);
 	//4. Create map 
+	data->map = create_map(data, parsed_lines);
+	print_data(data);
 	//5. Copy map
 	//5. Coordinates of player + empty his case 
 	//6. check map (walls all around + only one player) 	
