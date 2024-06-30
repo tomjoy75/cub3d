@@ -6,7 +6,7 @@
 /*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:18:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/29 23:40:44 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/06/30 23:57:38 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void print_flags(t_flag flag)
 {
 	printf("Color flags :\n\tc_color = %d\n\tf_color = %d\n", flag.c_color_flag, flag.f_color_flag);
 	printf("Texture flags :\n\tea_texture = %d\n\tno_texture = %d\n\twe_texture = %d\n\tso_texture = %d\n", flag.ea_texture_flag, flag.no_texture_flag, flag.we_texture_flag, flag.so_texture_flag);
+}
+
+void	del_content(void *content)
+{
+	free(content);	
 }
 
 void print_data(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:05:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/29 18:55:17 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/06/30 23:57:58 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	replace_newline_by_null(char *str);
 int	all_flags_set(t_flag flag);
 void print_flags(t_flag flag);
 void print_data(t_data *data);
+void	del_content(void *content);
 //inline int	is_whitespace(char c);
 
 

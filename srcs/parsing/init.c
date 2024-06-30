@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:13:37 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/27 18:03:31 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/06/30 23:57:27 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ t_list	*cb_build_linked_list(int fd)
 //		printf("Line %d : %s\n", count, next_line);
 		new_node = ft_lstnew((void *)next_line);
 		//TODO: case retour NULL -> free nodes and exit
+		if (!new_node)
+		{
+			ft_lstclear(&parsed_lines, del_content);
+			cb_error_msg("problem of allocation in linked list");
+		}
 		ft_lstadd_front(&parsed_lines, new_node);
 //		count++;
 	}	

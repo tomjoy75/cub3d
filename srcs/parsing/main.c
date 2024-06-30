@@ -6,7 +6,7 @@
 /*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/29 20:30:24 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/01 00:07:31 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ t_data	*parse_cub_file(t_list *list)
 	map_phase = 1;
 	data = malloc(sizeof(t_data));
 	if (!data)
+	{
+		ft_lstclear(&list, del_content);
+		cb_error_msg("problem of allocation of data");
+	}
 		return (NULL);
 	ft_memset((void *)data, 0, sizeof(data));
 	ft_memset(&flag, 0, sizeof(t_flag));
@@ -36,8 +40,8 @@ t_data	*parse_cub_file(t_list *list)
 			if (!is_valid_map_line((char *)list->content, &flag) || is_space_line((char *)list->content))
 			{
 				map_phase = 0;
-				printf("Hauteur map : %d\n", data->map_height);
-				printf("Largeur map : %d\n", data->map_len);
+//				printf("Hauteur map : %d\n", data->map_height);
+//				printf("Largeur map : %d\n", data->map_len);
 			}
 			else
 			{
@@ -50,8 +54,9 @@ t_data	*parse_cub_file(t_list *list)
 		{
 			if (!is_valid_element_line((char *)list->content, &flag, data))
 			{
+				ft_lstclear(&list, del_content);
 				free (data);	
-				cb_error_msg("Not a valid file");
+				cb_error_msg("some line in file is not valid");
 			}
 		//	else
 			//TODO: actualiser t_data, si l'element existe deja, lever une erreur
@@ -90,9 +95,10 @@ int	main(int argc, char **argv)
 	parsed_lines = cb_build_linked_list(fd);
 	//3. Check linked list and create structure
 	data = parse_cub_file(parsed_lines);
+	ft_lstclear(&parsed_lines, del_content);
 	//4. Create map 
-	data->map = create_map(data, parsed_lines);
-	print_data(data);
+//	data->map = create_map(data, parsed_lines);
+//	print_data(data);
 	//5. Copy map
 	//5. Coordinates of player + empty his case 
 	//6. check map (walls all around + only one player) 	
