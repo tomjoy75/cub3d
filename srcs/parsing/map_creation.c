@@ -6,7 +6,7 @@
 /*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:44:43 by joyeux            #+#    #+#             */
-/*   Updated: 2024/06/29 23:19:53 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/06/30 17:50:16 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	fill_the_map(int **map, t_list *list, t_data *data)
 	int	j;
 
 	j = data->map_height - 1;
-//	while (j < data->map_height)
 	while (j >= 0)
 	{
 		i = 0;
@@ -60,6 +59,36 @@ static void	fill_the_map(int **map, t_list *list, t_data *data)
 		list = list->next;
 		j--;
 	}
+}
+
+static void	check_map(int **map, int height, int len)
+{
+	int	i;
+	int	j;
+	
+	j = 0;
+	while (j < height)
+	{
+		i = 0;
+		while (i < len)
+		{
+			if (i == 0 || j == 0 || i == len - 1 || j == height - 1)
+			{
+				if (map[j][i] == 0)
+					cb_error_msg("map should be closed by walls");
+			}
+			else 
+			{
+				if (map[j][i] == 0 && (map[j - 1][i] == -1 || map[j + 1][i] == -1 || map[j][i - 1] == -1 || map[j][i + 1] == -1))
+					cb_error_msg("map should be closed by walls (inside and outside)");
+				else if (map[j][i] == -1 && (map[j - 1][i] == 0 || map[j + 1][i] == 0 || map[j][i - 1] == 0 || map[j][i + 1] == 0))
+					cb_error_msg("map should be closed by walls (inside and outside)");
+			}
+			i++;	
+		}
+		j++;
+	}	
+	printf ("Valid map\n");
 }
 
 //Creation of an 2D array representing the map
@@ -87,5 +116,6 @@ int	**create_map(t_data *data, t_list *list)
 		i++;
 	}*/
 	fill_the_map(map, list, data);
+	check_map(map, data->map_height, data->map_len);
 	return (map);
 }
