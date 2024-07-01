@@ -1,0 +1,12 @@
+
+NO tests/textures/N.xpm
+SO tests/textures/S.xpm
+WE tests/textures/W.xpm
+EA tests/textures/E.xpm
+
+C 128, 128, 128
+F 200, 200, 200
+11111111111111111111
+10000000000000000001
+10000000S00000000001
+11111111111111111111
