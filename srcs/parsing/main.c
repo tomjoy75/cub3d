@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/01 00:07:31 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/01 16:43:50 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ t_data	*parse_cub_file(t_list *list)
 	int		map_phase;
 	t_data	*data;
 	t_flag	flag;
+	t_list	*list_cpy;
 
 //	count = 0;
+	list_cpy = list;
 	map_phase = 1;
 	data = malloc(sizeof(t_data));
 	if (!data)
@@ -29,8 +31,7 @@ t_data	*parse_cub_file(t_list *list)
 		ft_lstclear(&list, del_content);
 		cb_error_msg("problem of allocation of data");
 	}
-		return (NULL);
-	ft_memset((void *)data, 0, sizeof(data));
+	ft_memset((void *)data, 0, sizeof(t_data));
 	ft_memset(&flag, 0, sizeof(t_flag));
 	while (list)
 	{
@@ -72,7 +73,13 @@ t_data	*parse_cub_file(t_list *list)
 		list = list->next;
 	}
 	//TODO: Y a t'il une map et un element de chaques? Chequer si les elements du tableau valent 0 ou NULL	
-	if (all_flags_set(flag))
+/*	if (!all_flags_set(flag))
+	{
+		ft_lstclear(&list, del_content);
+		free(data);	
+		return (NULL);
+	}*/
+	if (all_flags_set(flag, data, list_cpy))
 		printf ("Valid file\n");
 /*	else
 	{
@@ -95,9 +102,15 @@ int	main(int argc, char **argv)
 	parsed_lines = cb_build_linked_list(fd);
 	//3. Check linked list and create structure
 	data = parse_cub_file(parsed_lines);
-	ft_lstclear(&parsed_lines, del_content);
+
 	//4. Create map 
-//	data->map = create_map(data, parsed_lines);
+	data->map = create_map(data, parsed_lines);
+	ft_lstclear(&parsed_lines, del_content);
+	free(data->no_text);
+	free(data->so_text);
+	free(data->we_text);
+	free(data->ea_text);
+	free(data);
 //	print_data(data);
 	//5. Copy map
 	//5. Coordinates of player + empty his case 

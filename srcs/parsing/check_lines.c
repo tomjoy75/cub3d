@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/28 19:05:15 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/01 14:51:17 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	is_valid_color_line(char *str, t_flag *flag, t_data *data)
 		while (ft_isdigit(*str))
 		{
 			n *= 10;
-			n += *str - 48;
+			n += *str - '0';
 			str++;
 		}
 		if (n > 255 || n < 0)
@@ -68,7 +68,8 @@ int	is_valid_color_line(char *str, t_flag *flag, t_data *data)
 		index++;
 		if (*str != ',' && index < 3)
 			return (0);
-		str++;
+		if (*str == ',')
+			str++;
 //		count--;
 	}
 //	while (is_whitespace(*str))
@@ -111,21 +112,29 @@ int is_valid_texture_line(char *str, t_flag *flag, t_data *data)
 	{
 		flag->no_texture_flag++;
 		data->no_text = ft_strdup(ptr); //TODO: Gerer erreur d' allocations
+		if (!data->no_text)
+			return (0);
 	}
 	else if (!ft_strncmp(str, "SO", 2))
 	{
 		flag->so_texture_flag++;
 		data->so_text = ft_strdup(ptr); //TODO: Gerer erreur d' allocations
+		if (!data->so_text)
+			return (0);
 	}
 	else if (!ft_strncmp(str, "WE", 2))
 	{
 		flag->we_texture_flag++;
 		data->we_text = ft_strdup(ptr); //TODO: Gerer erreur d' allocations
+		if (!data->we_text)
+			return (0);
 	}
 	else if (!ft_strncmp(str, "EA", 2))
 	{
 		flag->ea_texture_flag++;
 		data->ea_text = ft_strdup(ptr); //TODO: Gerer erreur d' allocations
+		if (!data->ea_text)
+			return (0);
 	}
 	return (1);
 }

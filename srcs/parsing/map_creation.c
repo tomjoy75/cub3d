@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_creation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:44:43 by joyeux            #+#    #+#             */
-/*   Updated: 2024/06/30 17:50:16 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/01 17:11:28 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,20 @@ static int	**allocate_map(t_data *data)
 	int	**map;
 	int	i;
 	
-	map = ft_calloc(data->map_height, sizeof(int *));
+	map = ft_calloc(data->map_height , sizeof(int *));
 	if (!map)
 		return (NULL);
 	i = 0;
-	while (i < data->map_len)
+	while (i < data->map_height)
 	{
 		map[i] = ft_calloc(data->map_len, sizeof(int));
 		if (!map[i])
+			while (i > 0)
+			{
+				free(map[i - 1]);
+				i--;
+			}
+			free(map);
 			return (NULL);
 		i++;
 	}

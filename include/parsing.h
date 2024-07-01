@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:05:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/30 23:57:58 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/01 16:26:59 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ t_list	*cb_build_linked_list(int fd);
 //Utils
 void	cb_error_msg(char *msg);
 void	replace_newline_by_null(char *str);
-int	all_flags_set(t_flag flag);
+//int	all_flags_set(t_flag flag);
+int	all_flags_set(t_flag flag, t_data *data, t_list *list);
 void print_flags(t_flag flag);
 void print_data(t_data *data);
 void	del_content(void *content);
