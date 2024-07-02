@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:44:43 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/01 17:11:28 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/02 14:04:04 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	**allocate_map(t_data *data)
 	{
 		map[i] = ft_calloc(data->map_len, sizeof(int));
 		if (!map[i])
+		{
 			while (i > 0)
 			{
 				free(map[i - 1]);
@@ -33,6 +34,7 @@ static int	**allocate_map(t_data *data)
 			}
 			free(map);
 			return (NULL);
+		}
 		i++;
 	}
 	return (map);
