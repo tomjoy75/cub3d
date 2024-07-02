@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/02 15:28:01 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:44:24 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ t_data	*parse_cub_file(t_list *list)
 		}
 		if (!map_phase)
 		{
-			if (!is_valid_element_line((char *)list->content, &flag, data))
+			if (!is_valid_element_line((char *)list->content, &flag, data, list_cpy))
 			{
-				ft_lstclear(&list, del_content);
+				ft_lstclear(&list_cpy, del_content);
 				free (data);	
 				cb_error_msg("some line in file is not valid");
 			}

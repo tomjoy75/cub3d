@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:05:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/02 17:14:38 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:38:08 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	free_data(t_data *data);
 
 //Check lines
 int	is_valid_map_line(char *str, t_flag *flag);
-int is_valid_element_line(char *str, t_flag *flag, t_data *data);
+int is_valid_element_line(char *str, t_flag *flag, t_data *data, t_list *list);
 int is_space_line(char *str);
 //void	actualise_data_elements(char *str, t_data *data);
 

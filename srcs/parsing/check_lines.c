@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/02 15:19:31 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:42:58 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	is_valid_color_line(char *str, t_flag *flag, t_data *data)
 		return (*str = '\0', 0);
 }
 
-int is_valid_texture_line(char *str, t_flag *flag, t_data *data)
+int is_valid_texture_line(char *str, t_flag *flag, t_data *data, t_list *list)
 {
 	int		fd;
 	char	*ptr;
@@ -106,6 +106,10 @@ int is_valid_texture_line(char *str, t_flag *flag, t_data *data)
 	if (0 >= fd)
 //		strerror(stderr);
 //		cb_error_msg("File not found or no authorization");
+		
+		ft_lstclear(&list, del_content);
+		printf("TEST\n");
+		free(data);
 		cb_error_msg(strerror(errno));
 	close (fd);
 	if (!ft_strncmp(str, "NO", 2))
@@ -163,9 +167,9 @@ int is_space_line(char *str)
 }
 
 // Check for elements space_line, texture_line, color_line
-int is_valid_element_line(char *str, t_flag *flag, t_data *data)
+int is_valid_element_line(char *str, t_flag *flag, t_data *data, t_list *list)
 {
-	if (is_space_line(str) || is_valid_color_line(str, flag, data) || is_valid_texture_line(str, flag, data))
+	if (is_space_line(str) || is_valid_color_line(str, flag, data) || is_valid_texture_line(str, flag, data, list))
 		return (1);
 	else
 		return (0);	
