@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/01 16:27:58 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:13:55 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,37 @@ int	all_flags_set(t_flag flag, t_data *data, t_list *list)
 	return (1);
 }
 
+void	free_map(int ***map, int height, t_data *data, t_list *list)
+{
+	free(data->no_text);
+	free(data->so_text);
+	free(data->we_text);
+	free(data->ea_text);
+	free(data);
+	while (height > 0)
+	{
+		free((*map)[height - 1]);
+		height--;
+	}
+	free(*map);
+	ft_lstclear(&list, del_content);
+}
+
 // char	*copy_string(char *src)
+void	free_data(t_data *data)
+{
+	int		tmp;
+
+	free(data->no_text);
+	free(data->so_text);
+	free(data->we_text);
+	free(data->ea_text);
+	tmp = data->map_height;
+	while (tmp > 0)
+	{
+		free(data->map[tmp - 1]);
+		tmp--;
+	}
+	free(data->map);
+	free(data);
+}

@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:05:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/01 16:26:59 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:14:38 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	all_flags_set(t_flag flag, t_data *data, t_list *list);
 void print_flags(t_flag flag);
 void print_data(t_data *data);
 void	del_content(void *content);
+void	free_map(int ***map, int height, t_data *data, t_list *list);
+void	free_data(t_data *data);
 //inline int	is_whitespace(char c);
 
 

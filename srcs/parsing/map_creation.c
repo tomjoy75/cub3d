@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:44:43 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/02 14:04:04 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:12:59 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	fill_the_map(int **map, t_list *list, t_data *data)
 	}
 }
 
-static void	check_map(int **map, int height, int len)
+static void	check_map(int ***map, int height, int len, t_data *data, t_list *list)
 {
 	int	i;
 	int	j;
@@ -82,15 +82,24 @@ static void	check_map(int **map, int height, int len)
 		{
 			if (i == 0 || j == 0 || i == len - 1 || j == height - 1)
 			{
-				if (map[j][i] == 0)
+				if ((*map)[j][i] == 0)
+				{
+					free_map(map, height, data, list);
 					cb_error_msg("map should be closed by walls");
+				}
 			}
 			else 
 			{
-				if (map[j][i] == 0 && (map[j - 1][i] == -1 || map[j + 1][i] == -1 || map[j][i - 1] == -1 || map[j][i + 1] == -1))
+				if ((*map)[j][i] == 0 && ((*map)[j - 1][i] == -1 || (*map)[j + 1][i] == -1 || (*map)[j][i - 1] == -1 || (*map)[j][i + 1] == -1))
+				{
+					free_map(map, height, data, list);
 					cb_error_msg("map should be closed by walls (inside and outside)");
-				else if (map[j][i] == -1 && (map[j - 1][i] == 0 || map[j + 1][i] == 0 || map[j][i - 1] == 0 || map[j][i + 1] == 0))
-					cb_error_msg("map should be closed by walls (inside and outside)");
+				}
+				else if ((*map)[j][i] == -1 && ((*map)[j - 1][i] == 0 || (*map)[j + 1][i] == 0 || (*map)[j][i - 1] == 0 || (*map)[j][i + 1] == 0))
+				{
+					free_map(map, height, data, list);
+					cb_error_msg("map should be closed by walls (inside and outside)2");
+				}
 			}
 			i++;	
 		}
@@ -124,6 +133,6 @@ int	**create_map(t_data *data, t_list *list)
 		i++;
 	}*/
 	fill_the_map(map, list, data);
-	check_map(map, data->map_height, data->map_len);
+	check_map(&map, data->map_height, data->map_len, data, list);
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/01 16:43:50 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/02 15:28:01 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,8 @@ int	main(int argc, char **argv)
 	//4. Create map 
 	data->map = create_map(data, parsed_lines);
 	ft_lstclear(&parsed_lines, del_content);
-	free(data->no_text);
-	free(data->so_text);
-	free(data->we_text);
-	free(data->ea_text);
-	free(data);
-//	print_data(data);
+	print_data(data);
+	free_data(data);
 	//5. Copy map
 	//5. Coordinates of player + empty his case 
 	//6. check map (walls all around + only one player) 	
