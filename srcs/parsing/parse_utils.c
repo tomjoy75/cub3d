@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/02 17:13:55 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/03 18:36:57 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,16 @@ void	free_data(t_data *data)
 	}
 	free(data->map);
 	free(data);
+}
+
+void	free_during_parsing(t_list *list, t_data *data, char *msg)
+{
+	ft_lstclear(&list, del_content);
+	free(data->no_text);
+	free(data->so_text);
+	free(data->we_text);
+	free(data->ea_text);
+	free (data);	
+//	cb_error_msg("some line in file is not valid");
+	cb_error_msg(msg);
 }

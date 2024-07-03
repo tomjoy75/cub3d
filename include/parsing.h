@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:05:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/02 17:38:08 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/03 18:38:01 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void print_data(t_data *data);
 void	del_content(void *content);
 void	free_map(int ***map, int height, t_data *data, t_list *list);
 void	free_data(t_data *data);
+void	free_during_parsing(t_list *list, t_data *data, char *msg);
 //inline int	is_whitespace(char c);
 
 
