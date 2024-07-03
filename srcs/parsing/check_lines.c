@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/02 17:42:58 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/03 16:38:28 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ int	is_valid_color_line(char *str, t_flag *flag, t_data *data)
 	else if (*str == 'C')
 		flag->c_color_flag++;*/
 	str++;
-	while (is_whitespace(*str))
-		str++;
+
 	while (index < 3)
 	{
+		while (is_whitespace(*str))
+			str++;
 		if (!ft_isdigit(*str))
 			return (0);
 		while (ft_isdigit(*str))
@@ -106,11 +107,12 @@ int is_valid_texture_line(char *str, t_flag *flag, t_data *data, t_list *list)
 	if (0 >= fd)
 //		strerror(stderr);
 //		cb_error_msg("File not found or no authorization");
-		
+	{	
 		ft_lstclear(&list, del_content);
 		printf("TEST\n");
 		free(data);
 		cb_error_msg(strerror(errno));
+	}
 	close (fd);
 	if (!ft_strncmp(str, "NO", 2))
 	{

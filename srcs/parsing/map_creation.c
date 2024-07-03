@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:44:43 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/02 17:12:59 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/02 17:12:592y tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,18 @@ static void	fill_the_map(int **map, t_list *list, t_data *data)
 {
 	int	i;
 	int	j;
+	int	eol;
 
 	j = data->map_height - 1;
 	while (j >= 0)
 	{
 		i = 0;
+		eol = 0;
 		while (i < data->map_len)
 		{
-			if (((char *)list->content)[i] == ' ')
+			if (eol || ((char *)list->content)[i] == '\0')
+				eol = 1;
+			if (eol || ((char *)list->content)[i] == ' ')
 				map[j][i] = -1;
 			else if (strchr("NSEW",((char *)list->content)[i]))
 			{
