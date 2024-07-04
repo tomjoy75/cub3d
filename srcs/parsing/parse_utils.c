@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/03 18:36:57 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/04 13:52:08 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 void	cb_error_msg(char *msg)
 {
-	printf(RED"Error\n"RESET);
-	printf(ITALIC"\t%s\n"RESET, msg);
+	ft_putstr_fd(RED"Error\n"RESET, 2);
+	ft_putstr_fd("\t"ITALIC, 2);
+	ft_putstr_fd(msg , 2);
+	ft_putstr_fd(RESET"\n", 2);
 	exit(EXIT_FAILURE);
 }
 

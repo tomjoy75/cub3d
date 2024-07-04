@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/03 18:37:40 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/04 14:36:34 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,17 @@ t_data	*parse_cub_file(t_list *list)
 		return (NULL);
 	}*/
 	if (all_flags_set(flag, data, list_cpy))
-		printf ("Valid file\n");
+		return (data);
+	else 
+		return (NULL);
 /*	else
 	{
 		print_flags(flag);
 		cb_error_msg("There should be 1 and only 1 texture by orientation and ");
 	}*/
-	return (data);
 }
 
-int	main(int argc, char **argv)
+t_data	*parse_file(int argc, char **argv)
 {
 	int	fd;
 	t_list	*parsed_lines;
@@ -103,16 +104,15 @@ int	main(int argc, char **argv)
 	parsed_lines = cb_build_linked_list(fd);
 	//3. Check linked list and create structure
 	data = parse_cub_file(parsed_lines);
-
+	if (!data)
+		return (NULL);
 	//4. Create map 
 	data->map = create_map(data, parsed_lines);
 	ft_lstclear(&parsed_lines, del_content);
-	print_data(data);
-	free_data(data);
+	return (data);
 	//5. Copy map
 	//5. Coordinates of player + empty his case 
 	//6. check map (walls all around + only one player) 	
  
-	return (0);
+//	return (1);
 }
-//gcc srcs/parsing/*.c -I./include -I./libft -L./libft -lft

@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:05:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/03 18:38:01 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/04 14:31:44 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_flag
 }				t_flag;
 
 
+t_data	*parse_file(int argc, char **argv);
 int cb_check_args(int argc, char** argv);
 t_list	*cb_build_linked_list(int fd);
 //Utils

@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:26:36 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/06/27 18:01:33 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/04 14:35:30 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <errno.h>
 
+//COLORS
 # define BLACK		"\x1b[1;30m"
 # define RED		"\x1b[1;31m"
 # define GREEN		"\x1b[1;32m"
@@ -29,6 +30,11 @@
 # define WHITE		"\x1b[1;37m"
 # define ITALIC		"\x1b[1;3m"
 # define RESET		"\x1b[0m"
+
+//MAP
+# define EMPTY	-1
+# define FLOOR	0	
+# define WALL	1	
 
 typedef struct s_data
 {

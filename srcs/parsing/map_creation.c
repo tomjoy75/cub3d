@@ -56,13 +56,13 @@ static void	fill_the_map(int **map, t_list *list, t_data *data)
 			if (eol || ((char *)list->content)[i] == '\0')
 				eol = 1;
 			if (eol || ((char *)list->content)[i] == ' ')
-				map[j][i] = -1;
+				map[j][i] = EMPTY;
 			else if (strchr("NSEW",((char *)list->content)[i]))
 			{
 				data->pos_x = i;
 				data->pos_y = j;
 				data->orientation = ((char *)list->content)[i];
-				map[j][i] = 0;
+				map[j][i] = FLOOR;
 			}
 			else
 				map[j][i] = ((char *)list->content)[i] - 48;
@@ -86,7 +86,7 @@ static void	check_map(int ***map, int height, int len, t_data *data, t_list *lis
 		{
 			if (i == 0 || j == 0 || i == len - 1 || j == height - 1)
 			{
-				if ((*map)[j][i] == 0)
+				if ((*map)[j][i] == FLOOR)
 				{
 					free_map(map, height, data, list);
 					cb_error_msg("map should be closed by walls");
@@ -94,15 +94,15 @@ static void	check_map(int ***map, int height, int len, t_data *data, t_list *lis
 			}
 			else 
 			{
-				if ((*map)[j][i] == 0 && ((*map)[j - 1][i] == -1 || (*map)[j + 1][i] == -1 || (*map)[j][i - 1] == -1 || (*map)[j][i + 1] == -1))
+				if ((*map)[j][i] == FLOOR && ((*map)[j - 1][i] == EMPTY || (*map)[j + 1][i] == EMPTY || (*map)[j][i - 1] == EMPTY || (*map)[j][i + 1] == EMPTY))
 				{
 					free_map(map, height, data, list);
 					cb_error_msg("map should be closed by walls (inside and outside)");
 				}
-				else if ((*map)[j][i] == -1 && ((*map)[j - 1][i] == 0 || (*map)[j + 1][i] == 0 || (*map)[j][i - 1] == 0 || (*map)[j][i + 1] == 0))
+				else if ((*map)[j][i] == EMPTY && ((*map)[j - 1][i] == FLOOR || (*map)[j + 1][i] == FLOOR || (*map)[j][i - 1] == FLOOR || (*map)[j][i + 1] == FLOOR))
 				{
 					free_map(map, height, data, list);
-					cb_error_msg("map should be closed by walls (inside and outside)2");
+					cb_error_msg("map should be closed by walls (inside and outside)");
 				}
 			}
 			i++;	
