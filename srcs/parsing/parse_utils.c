@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/04 13:52:08 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/04 15:32:39 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	free_data(t_data *data)
 	free(data);
 }
 
-void	free_during_parsing(t_list *list, t_data *data, char *msg)
+void	free_parsing(t_list *list, t_data *data, char *msg)
 {
 	ft_lstclear(&list, del_content);
 	free(data->no_text);

@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 14:32:29 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/04 14:35:54 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/04 15:20:16 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	data = parse_file(argc,argv);
+	data = parse_file(argc, argv);
 	if (!data)
 		return (1);
 	// To check parsing

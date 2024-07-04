@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/03 18:35:55 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/04 15:42:58 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	is_valid_texture_line(char *str, t_flag *flag, t_data *data, t_list *list)
 		ptr++;
 	fd = open(ptr, O_RDONLY);
 	if (0 >= fd)
-		free_during_parsing(list, data, strerror(errno));
+		free_parsing(list, data, strerror(errno));
 /*	{	
 		ft_lstclear(&list, del_content);
 		printf("TEST\n");
