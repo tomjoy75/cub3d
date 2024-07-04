@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Répertoire contenant les fichiers .cub
-#MAPS_DIR="tests/maps"
-MAPS_DIR="maps"
+MAPS_DIR="tests/maps"
+#MAPS_DIR="maps"
 # Fichier exécutable
 EXECUTABLE="./a.out"
 
