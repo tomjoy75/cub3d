@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_lines.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/04 15:42:58 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/05 22:57:14 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	is_whitespace(char c)
 	return ((c >= 9 && c <= 13) || c == 32);
 }
 
-int	is_valid_color_line(char *str, t_flag *flag, t_data *data)
+int	is_valid_color_line(char *str, t_flag *flag, t_data *data, t_list *list)
 {
 	int		n;
 	int		index;
@@ -36,16 +36,17 @@ int	is_valid_color_line(char *str, t_flag *flag, t_data *data)
 		while (is_whitespace(*str))
 			str++;
 		if (!ft_isdigit(*str))
-			return (0);
+			free_parsing(list, data, "color line is not correctly formatted");
+	//		return (0);
 		while (ft_isdigit(*str))
 		{
 			n *= 10;
 			n += *str - '0';
+			if (n > 255 || n < 0)
+				free_parsing(list, data, "color values should be form 0 to 255");
 			str++;
 		}
-		if (n > 255 || n < 0)
-			return (0);
-		else if (elem == 'F')
+		if (elem == 'F')
 		{
 			flag->f_color_flag++;
 			data->f_color[index] = n;
@@ -57,15 +58,20 @@ int	is_valid_color_line(char *str, t_flag *flag, t_data *data)
 		}
 		n = 0;
 		index++;
+		while (is_whitespace(*str))
+			str++;
 		if (*str != ',' && index < 3)
-			return (0);
+			free_parsing(list, data, "color line is not correctly formatted");
 		if (*str == ',')
 			str++;
 	}
+	while (is_whitespace(*str))
+		str++;
 	if (!*str || *str == '\n')
 		return (1);
-	else
-		return (*str = '\0', 0);
+	free_parsing(list, data, "color line is not correctly formatted");
+	return (0);
+//		return (*str = '\0', 0);
 }
 
 int	is_valid_texture_line(char *str, t_flag *flag, t_data *data, t_list *list)
@@ -150,7 +156,7 @@ int	is_space_line(char *str)
 // Check for elements space_line, texture_line, color_line
 int	is_valid_element_line(char *str, t_flag *flag, t_data *data, t_list *list)
 {
-	if (is_space_line(str) || is_valid_color_line(str, flag, data)
+	if (is_space_line(str) || is_valid_color_line(str, flag, data, list)
 		|| is_valid_texture_line(str, flag, data, list))
 		return (1);
 	else

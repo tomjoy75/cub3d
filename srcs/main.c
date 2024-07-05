@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 14:32:29 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/04 15:20:16 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/05 18:19:46 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,4 @@ int	main(int argc, char **argv)
 	free_data(data);
 	return (0);
 }
-//gcc srcs/parsing/*.c -I./include -I./libft -L./libft -lft
+//gcc -g3 srcs/parsing/*.c srcs/main.c -I./include -I./libft -L./libft -lft

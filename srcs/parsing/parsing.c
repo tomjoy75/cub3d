@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/04 15:53:10 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/05 23:05:08 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,11 @@ t_data	*parse_cub_file(t_list *list)
 			parse_map(list, data, &flag, &map_phase);
 		if (!map_phase && !is_valid_element_line((char *)list->content
 				, &flag, data, list_cpy))
-			free_parsing(list_cpy, data, "some line in file is not valid");
+			free_parsing(list_cpy, data, "some line(s) in file is not valid");
 		list = list->next;
 	}
+	if (!data->map_height)
+		free_parsing(list_cpy, data, "empty map");
 	if (all_flags_set(flag, data, list_cpy))
 		return (data);
 	else
