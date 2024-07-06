@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:05:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/04 15:32:23 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/06 22:40:34by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	del_content(void *content);
 void	free_map(int ***map, int height, t_data *data, t_list *list);
 void	free_data(t_data *data);
 void	free_parsing(t_list *list, t_data *data, char *msg);
-//inline int	is_whitespace(char c);
-
+int	**allocate_map(t_data *data);
 
 //Check lines
 int	is_valid_map_line(char *str, t_flag *flag);

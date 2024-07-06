@@ -6,7 +6,7 @@
 /*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/05 22:57:14 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/06 22:48:33 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,12 @@ int	is_valid_color_line(char *str, t_flag *flag, t_data *data, t_list *list)
 			str++;
 		if (!ft_isdigit(*str))
 			free_parsing(list, data, "color line is not correctly formatted");
-	//		return (0);
 		while (ft_isdigit(*str))
 		{
 			n *= 10;
 			n += *str - '0';
 			if (n > 255 || n < 0)
-				free_parsing(list, data, "color values should be form 0 to 255");
+				free_parsing(list, data, "colors should be form 0 to 255");
 			str++;
 		}
 		if (elem == 'F')
@@ -71,7 +70,6 @@ int	is_valid_color_line(char *str, t_flag *flag, t_data *data, t_list *list)
 		return (1);
 	free_parsing(list, data, "color line is not correctly formatted");
 	return (0);
-//		return (*str = '\0', 0);
 }
 
 int	is_valid_texture_line(char *str, t_flag *flag, t_data *data, t_list *list)
@@ -92,12 +90,6 @@ int	is_valid_texture_line(char *str, t_flag *flag, t_data *data, t_list *list)
 	fd = open(ptr, O_RDONLY);
 	if (0 >= fd)
 		free_parsing(list, data, strerror(errno));
-/*	{	
-		ft_lstclear(&list, del_content);
-		printf("TEST\n");
-		free(data);
-		cb_error_msg(strerror(errno));
-	}*/
 	close (fd);
 	if (!ft_strncmp(str, "NO", 2))
 	{
