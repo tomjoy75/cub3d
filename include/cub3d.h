@@ -6,7 +6,7 @@
 /*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:26:36 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/05 18:30:01 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/07 19:17:10 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ typedef struct s_data
 	char	*ea_text;	
 	int		f_color[3];
 	int		c_color[3];
-	int**	map;
+	int		**map;
 	int		map_len;
 	int		map_height;
 	int		pos_x;
 	int		pos_y;
 	char	orientation;
 }				t_data;
- 
+
 #endif

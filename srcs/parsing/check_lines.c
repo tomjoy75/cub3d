@@ -6,7 +6,7 @@
 /*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/07 13:18:16 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/07 19:01:51 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,46 +61,9 @@ int	is_valid_texture_line(char *str, t_flag *flag, t_data *data, t_list *list)
 	if (0 >= fd)
 		free_parsing(list, data, strerror(errno));
 	close (fd);
-	if (!ft_strncmp(str, "NO", 2))
-	{
-		flag->no_texture_flag++;
-		if (!data->no_text)
-		{
-			data->no_text = ft_strdup(ptr);
-			if (!data->no_text)
-				return (0);
-		}
-	}
-	else if (!ft_strncmp(str, "SO", 2))
-	{
-		flag->so_texture_flag++;
-		if (!data->so_text)
-		{
-			data->so_text = ft_strdup(ptr);
-			if (!data->so_text)
-				return (0);
-		}
-	}
-	else if (!ft_strncmp(str, "WE", 2))
-	{
-		flag->we_texture_flag++;
-		if (!data->we_text)
-		{
-			data->we_text = ft_strdup(ptr);
-			if (!data->we_text)
-				return (0);
-		}
-	}
-	else if (!ft_strncmp(str, "EA", 2))
-	{
-		flag->ea_texture_flag++;
-		if (!data->ea_text)
-		{
-			data->ea_text = ft_strdup(ptr);
-			if (!data->ea_text)
-				return (0);
-		}
-	}
+	if (!set_no_so_textures(str, flag, data, ptr)
+		|| !set_ea_we_textures(str, flag, data, ptr))
+		free_parsing(list, data, strerror(errno));
 	return (1);
 }
 

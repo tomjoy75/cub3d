@@ -6,7 +6,7 @@
 /*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:58:52 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/06 22:39:39 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/07 18:35:13 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ void	free_parsing(t_list *list, t_data *data, char *msg)
 	cb_error_msg(msg);
 }
 
-int	**allocate_map(t_data *data)
+int	**allocate_map(t_list *list, t_data *data)
 {
 	int	**map;
 	int	i;
 
 	map = ft_calloc(data->map_height, sizeof(int *));
 	if (!map)
-		return (NULL);
+		free_parsing(list, data, "map allocation failed");
 	i = 0;
 	while (i < data->map_height)
 	{
@@ -88,7 +88,7 @@ int	**allocate_map(t_data *data)
 				i--;
 			}
 			free(map);
-			return (NULL);
+			free_parsing(list, data, "map allocation failed");
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 22:38:17 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/06 22:40:51 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/07 18:32:01 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	**create_map(t_data *data, t_list *list)
 	int	**map;
 	int	i;
 
-	map = allocate_map(data);
+	map = allocate_map(list, data);
 	if (!map)
 		return (NULL);
 	fill_the_map(map, list, data);
