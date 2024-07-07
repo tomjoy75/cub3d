@@ -6,17 +6,12 @@
 /*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/06 22:48:33 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/07 13:18:16 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
-
-int	is_whitespace(char c)
-{
-	return ((c >= 9 && c <= 13) || c == 32);
-}
 
 int	is_valid_color_line(char *str, t_flag *flag, t_data *data, t_list *list)
 {
@@ -24,7 +19,6 @@ int	is_valid_color_line(char *str, t_flag *flag, t_data *data, t_list *list)
 	int		index;
 	char	elem;
 
-	n = 0;
 	index = 0;
 	if (*str != 'F' && *str != 'C')
 		return (0);
@@ -33,39 +27,15 @@ int	is_valid_color_line(char *str, t_flag *flag, t_data *data, t_list *list)
 	str++;
 	while (index < 3)
 	{
-		while (is_whitespace(*str))
-			str++;
+		str = pass_whitespaces(str);
 		if (!ft_isdigit(*str))
 			free_parsing(list, data, "color line is not correctly formatted");
-		while (ft_isdigit(*str))
-		{
-			n *= 10;
-			n += *str - '0';
-			if (n > 255 || n < 0)
-				free_parsing(list, data, "colors should be form 0 to 255");
-			str++;
-		}
-		if (elem == 'F')
-		{
-			flag->f_color_flag++;
-			data->f_color[index] = n;
-		}
-		else if (elem == 'C')
-		{
-			flag->c_color_flag++;
-			data->c_color[index] = n;
-		}
-		n = 0;
-		index++;
-		while (is_whitespace(*str))
-			str++;
-		if (*str != ',' && index < 3)
-			free_parsing(list, data, "color line is not correctly formatted");
-		if (*str == ',')
-			str++;
+		str = color_atoi(&n, str, list, data);
+		set_flag_color(elem, flag, index, n);
+		set_data_color(elem, data, index, n);
+		str = skip_spaces_and_comma(&index, str, list, data);
 	}
-	while (is_whitespace(*str))
-		str++;
+	str = pass_whitespaces(str);
 	if (!*str || *str == '\n')
 		return (1);
 	free_parsing(list, data, "color line is not correctly formatted");

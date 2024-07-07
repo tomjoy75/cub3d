@@ -6,14 +6,19 @@
 /*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/06 17:03:32 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/07 13:15:44 by joyeux           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
 
-inline int	is_whitespace(char c)
+/*inline int	is_whitespace(char c)
+{
+	return ((c >= 9 && c <= 13) || c == 32);
+}*/
+
+int	is_whitespace(char c)
 {
 	return ((c >= 9 && c <= 13) || c == 32);
 }
