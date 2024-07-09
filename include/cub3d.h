@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:26:36 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/07 19:17:10 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/09 15:12:45 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,31 @@
 # define EMPTY	-1
 # define FLOOR	0	
 # define WALL	1	
+# define DOOR	2	
 
-typedef struct s_data
+typedef struct s_datap
 {
 	char	*no_text;
 	char	*so_text;	
 	char	*we_text;	
 	char	*ea_text;	
-	int		f_color[3];
-	int		c_color[3];
+	int		f_color;
+	int		c_color;
 	int		**map;
 	int		map_len;
 	int		map_height;
 	int		pos_x;
 	int		pos_y;
 	char	orientation;
-}				t_data;
+}				t_datap;
 
+//Memory Gestion
+
+// destroy only the paths name files
+void	destroy_path(t_datap *data);
+// destroy the map
+void	destroy_map(int ***map, int map_height);
+// destroy the structure data for parsing
+void	destroy_datap(t_datap **data);
+ 
 #endif

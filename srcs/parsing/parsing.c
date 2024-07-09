@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/05 23:05:08 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/09 13:13:28 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
 
-static void	parse_map(t_list *list, t_data *data, t_flag *flag, int *map_phase)
+static void	parse_map(t_list *list, t_datap *data, t_flag *flag, int *map_phase)
 {
 	if (!is_valid_map_line((char *)list->content, flag)
 		|| is_space_line((char *)list->content))
@@ -28,30 +28,30 @@ static void	parse_map(t_list *list, t_data *data, t_flag *flag, int *map_phase)
 	}
 }
 
-static t_data	*init_data(t_list *list)
+static t_datap	*init_datap(t_list *list)
 {
-	t_data	*data;
+	t_datap	*data;
 
-	data = malloc(sizeof(t_data));
+	data = malloc(sizeof(t_datap));
 	if (!data)
 	{
 		ft_lstclear(&list, del_content);
 		cb_error_msg("problem with allocation of data");
 	}
-	ft_memset((void *)data, 0, sizeof(t_data));
+	ft_memset((void *)data, 0, sizeof(t_datap));
 	return (data);
 }
 
-t_data	*parse_cub_file(t_list *list)
+t_datap	*parse_cub_file(t_list *list)
 {
 	int		map_phase;
-	t_data	*data;
+	t_datap	*data;
 	t_flag	flag;
 	t_list	*list_cpy;
 
 	list_cpy = list;
 	map_phase = 1;
-	data = init_data(list);
+	data = init_datap(list);
 	ft_memset(&flag, 0, sizeof(t_flag));
 	while (list)
 	{
@@ -70,11 +70,11 @@ t_data	*parse_cub_file(t_list *list)
 		return (NULL);
 }
 
-t_data	*parse_file(int argc, char **argv)
+t_datap	*parse_file(int argc, char **argv)
 {
 	int		fd;
 	t_list	*parsed_lines;
-	t_data	*data;
+	t_datap	*data;
 
 	fd = cb_check_args(argc, argv);
 	parsed_lines = cb_build_linked_list(fd);

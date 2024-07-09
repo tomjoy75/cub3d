@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_lines.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/07 19:01:51 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/09 15:36:38 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
 
-int	is_valid_color_line(char *str, t_flag *flag, t_data *data, t_list *list)
+int	is_valid_color_line(char *str, t_flag *flag, t_datap *data, t_list *list)
 {
 	int		n;
 	int		index;
@@ -32,7 +32,7 @@ int	is_valid_color_line(char *str, t_flag *flag, t_data *data, t_list *list)
 			free_parsing(list, data, "color line is not correctly formatted");
 		str = color_atoi(&n, str, list, data);
 		set_flag_color(elem, flag, index, n);
-		set_data_color(elem, data, index, n);
+		set_datap_color(elem, data, index, n);
 		str = skip_spaces_and_comma(&index, str, list, data);
 	}
 	str = pass_whitespaces(str);
@@ -42,7 +42,7 @@ int	is_valid_color_line(char *str, t_flag *flag, t_data *data, t_list *list)
 	return (0);
 }
 
-int	is_valid_texture_line(char *str, t_flag *flag, t_data *data, t_list *list)
+int	is_valid_texture_line(char *str, t_flag *flag, t_datap *data, t_list *list)
 {
 	int		fd;
 	char	*ptr;
@@ -79,7 +79,7 @@ int	is_space_line(char *str)
 }
 
 // Check for elements space_line, texture_line, color_line
-int	is_valid_element_line(char *str, t_flag *flag, t_data *data, t_list *list)
+int	is_valid_element_line(char *str, t_flag *flag, t_datap *data, t_list *list)
 {
 	if (is_space_line(str) || is_valid_color_line(str, flag, data, list)
 		|| is_valid_texture_line(str, flag, data, list))
@@ -93,7 +93,7 @@ int	is_valid_map_line(char *str, t_flag *flag)
 {
 	while (*str && *str != '\n')
 	{
-		if (!ft_strchr(" 01NSEW", *str))
+		if (!ft_strchr(CB_MAP_VALID_CHAR, *str))
 			return (0);
 		if (ft_strchr("NSEW", *str))
 			flag->player_flag++;

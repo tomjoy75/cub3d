@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:18:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/09 12:50:53 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/09 13:13:28 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	del_content(void *content)
 	free(content);
 }
 
-static void	print_map(t_data *data)
+static void	print_map(t_datap *data)
 {
 	int	i;
 	int	j;
@@ -48,7 +48,7 @@ static void	print_map(t_data *data)
 	}
 }
 
-void	print_data(t_data *data)
+void	print_datap(t_datap *data)
 {
 	int	i;
 

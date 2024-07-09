@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:58:52 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/09 12:57:41 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/09 13:13:28 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	cb_error_msg(char *msg)
 	exit(EXIT_FAILURE);
 }
 
-void	free_map(int ***map, int height, t_data *data, t_list *list)
+void	free_map(int ***map, int height, t_datap *data, t_list *list)
 {
 	free(data->no_text);
 	free(data->so_text);
@@ -39,7 +39,7 @@ void	free_map(int ***map, int height, t_data *data, t_list *list)
 }
 
 // char	*copy_string(char *src)
-void	free_data(t_data *data)
+void	free_data(t_datap *data)
 {
 	int		tmp;
 
@@ -61,7 +61,7 @@ void	free_data(t_data *data)
 	free(data);
 }
 
-void	free_parsing(t_list *list, t_data *data, char *msg)
+void	free_parsing(t_list *list, t_datap *data, char *msg)
 {
 	ft_lstclear(&list, del_content);
 	free(data->no_text);
@@ -72,7 +72,7 @@ void	free_parsing(t_list *list, t_data *data, char *msg)
 	cb_error_msg(msg);
 }
 
-int	**allocate_map(t_list *list, t_data *data)
+int	**allocate_map(t_list *list, t_datap *data)
 {
 	int	**map;
 	int	i;

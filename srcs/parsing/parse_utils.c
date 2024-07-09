@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/07 13:15:44 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/09 15:41:36 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 int	is_whitespace(char c)
 {
 	return ((c >= 9 && c <= 13) || c == 32);
+}
+
+int	_is_walkable(int tile)
+{
+	return (tile == FLOOR || tile == DOOR);
 }
 
 void	replace_newline_by_null(char *str)
@@ -38,7 +43,7 @@ void	replace_newline_by_null(char *str)
 	}
 }
 
-int	all_flags_set(t_flag flag, t_data *data, t_list *list)
+int	all_flags_set(t_flag flag, t_datap *data, t_list *list)
 {
 	if (flag.c_color_flag != 3 || flag.f_color_flag != 3
 		|| flag.ea_texture_flag != 1 || flag.no_texture_flag != 1
