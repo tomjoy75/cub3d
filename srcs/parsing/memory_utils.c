@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:58:52 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/07 18:35:13 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/09 12:57:41 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,17 @@ void	free_data(t_data *data)
 	free(data->so_text);
 	free(data->we_text);
 	free(data->ea_text);
-	tmp = data->map_height;
-	while (tmp > 0)
+	if (data->map)
 	{
-		free(data->map[tmp - 1]);
-		tmp--;
+		tmp = data->map_height;
+		while (tmp > 0)
+		{
+			free(data->map[tmp - 1]);
+			tmp--;
+		}
+		free(data->map);
+		data->map = NULL;
 	}
-	free(data->map);
 	free(data);
 }
 

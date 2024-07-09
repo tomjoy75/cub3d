@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:18:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/07 00:11:03 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/09 12:50:53 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,11 @@ void	print_data(t_data *data)
 
 	i = -1;
 	printf("f_color : (");
-	while (++i < 3)
-		printf("_%d_", data->f_color[i]);
+	printf("_%x_", data->f_color);
 	printf(")\n");
 	i = -1;
 	printf("c_color : (");
-	while (++i < 3)
-		printf("_%d_", data->c_color[i]);
+	printf("_%x_", data->c_color);
 	printf(")\n");
 	printf("no texture : %s\n", data->no_text);
 	printf("so texture : %s\n", data->so_text);

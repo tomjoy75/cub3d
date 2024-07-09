@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joyeux <joyeux@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:17:13 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/07 13:21:15 by joyeux           ###   ########.fr       */
+/*   Updated: 2024/07/09 12:50:06 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	set_data_color(char elem, t_data *data, int index, int n)
 {
 	if (elem == 'F')
 	{
-		data->f_color[index] = n;
+		data->f_color += n<<((2 - index) * 8);
 	}
 	else if (elem == 'C')
 	{
-		data->c_color[index] = n;
+		data->c_color += n<<((2 - index) * 8);
 	}
 }
 
