@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 22:38:17 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/09 15:41:25 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/11 15:45:43 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ static void	check_map(int ***map, t_datap *data, t_list *list)
 int	**create_map(t_datap *data, t_list *list)
 {
 	int	**map;
-	int	i;
 
 	map = allocate_map(list, data);
 	if (!map)

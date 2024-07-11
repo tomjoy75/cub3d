@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 19:15:41 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/09 15:42:38 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/11 15:42:03 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		**create_map(t_datap *data, t_list *list);
 //Color parsing
 char	*pass_whitespaces(char *str);
 char	*color_atoi(int *n, char *str, t_list *list, t_datap *data);
-void	set_flag_color(char elem, t_flag *flag, int index, int n);
+void	set_flag_color(char elem, t_flag *flag);
 void	set_datap_color(char elem, t_datap *data, int index, int n);
 char	*skip_spaces_and_comma(int *index, char *str, t_list *list,
 			t_datap *data);

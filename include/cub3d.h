@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:26:36 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/09 15:12:45 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/11 15:51:30 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ void	destroy_path(t_datap *data);
 void	destroy_map(int ***map, int map_height);
 // destroy the structure data for parsing
 void	destroy_datap(t_datap **data);
- 
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:17:13 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/09 15:39:15 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/11 15:41:28 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*color_atoi(int *n, char *str, t_list *list, t_datap *data)
 	return (str);
 }
 
-void	set_flag_color(char elem, t_flag *flag, int index, int n)
+void	set_flag_color(char elem, t_flag *flag)
 {
 	if (elem == 'F')
 	{

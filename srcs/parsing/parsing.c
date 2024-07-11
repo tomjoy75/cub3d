@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/09 13:13:28 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/11 15:48:53 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	parse_map(t_list *list, t_datap *data, t_flag *flag, int *map_phase)
 	else
 	{
 		data->map_height++;
-		if (ft_strlen((char *)list->content) > data->map_len)
+		if (ft_strlen((char *)list->content) > (size_t)data->map_len)
 			data->map_len = ft_strlen((char *)list->content);
 	}
 }

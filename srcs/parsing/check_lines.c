@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/09 15:36:38 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/11 15:43:44 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	is_valid_color_line(char *str, t_flag *flag, t_datap *data, t_list *list)
 		if (!ft_isdigit(*str))
 			free_parsing(list, data, "color line is not correctly formatted");
 		str = color_atoi(&n, str, list, data);
-		set_flag_color(elem, flag, index, n);
+		set_flag_color(elem, flag);
 		set_datap_color(elem, data, index, n);
 		str = skip_spaces_and_comma(&index, str, list, data);
 	}

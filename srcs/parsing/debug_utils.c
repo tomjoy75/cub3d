@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:18:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/09 13:13:28 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/11 15:44:49 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,9 @@ static void	print_map(t_datap *data)
 
 void	print_datap(t_datap *data)
 {
-	int	i;
-
-	i = -1;
 	printf("f_color : (");
 	printf("_%x_", data->f_color);
 	printf(")\n");
-	i = -1;
 	printf("c_color : (");
 	printf("_%x_", data->c_color);
 	printf(")\n");
