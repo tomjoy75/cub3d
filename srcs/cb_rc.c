@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 13:03:20 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 13:33:06 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/15 17:02:48 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ static int	_ini_player(t_data *data, t_ray *ray, const double *player_xydcs)
 	ray->oob_y = data->map->height;
 	if (0 > ray->map_x || 0 > ray->map_y \
 		|| ray->map_x >= data->map->width || ray->map_y >= data->map->height)
-		return (1);
-	if (CB_MAP_EMPTY == data->map->cells[ray->map_y][ray->map_x])
-		return (1);
-	return (0);
+		return (CB_RETURN_FAILURE);
+	if (CB_TILE_EMPTY == data->map->cells[ray->map_y][ray->map_x])
+		return (CB_RETURN_FAILURE);
+	return (CB_RETURN_SUCCESS);
 }
 
 

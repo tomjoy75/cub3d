@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 12:28:57 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/15 17:25:59 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_data
 	double		player_xydcs[5];
 	int			ceil_color;
 	int			floor_color;
+	int			enable_mouse;
 	t_textures	*textures;
 	t_sprite	*sprite;
 	t_img		img;
@@ -99,14 +100,12 @@ void	*cb_data_ptr_win_get(void *data_ptr);
 void	*cb_data_ptr_mlx_get(void *data_ptr);
 void	*cb_data_ptr_img_get(void *data_ptr);
 t_img	*cb_data_img_get(void *data_ptr);
-void	cb_data_dx_ini(void *data_ptr);
-int		cb_data_dx_get(void *data_ptr);
-void	cb_data_player_turn(void *data_ptr, int mouse_dx);
-void	cb_data_player_pos_ini(void *data_ptr, double x, double y);
-void	cb_data_player_angle_ini(void *data_ptr, \
-	double angle, double c, double s);
-void	cb_data_player_strafe(void *data_ptr, double dx, double dy);
-void	cb_data_player_get(void *data_ptr, double *xycs);
+void	cb_data_mouse_dx_ini(t_data *data_ptr);
+int		cb_data_mouse_dx_get(t_data *data_ptr);
+void	cb_player_turn(t_data *data_ptr, int mouse_dx);
+void	cb_player_pos_ini(t_data *data_ptr, double x, double y);
+void	cb_player_angle_ini(t_data *data, char dir);
+void	cb_player_strafe(t_data *data_ptr, double dx, double dy);
 
 
 #endif

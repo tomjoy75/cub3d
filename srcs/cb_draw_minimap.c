@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:38:36 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 13:51:25 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/15 17:03:16 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 int	_get_color(t_data *data, int *xy)
 {
-	const int	tile_arr[5] = {CB_MAP_WALL, CB_MAP_FLOOR, \
-		CB_TILE_DOOR, CB_TILE_DOOR_OPEN, CB_MAP_EMPTY};
+	const int	tile_arr[5] = {CB_TILE_WALL, CB_TILE_FLOOR, \
+		CB_TILE_DOOR, CB_TILE_DOOR_OPEN, CB_TILE_EMPTY};
 	const int	tile_color[5] = {CB_MAP_WALL_COLOR, CB_MAP_FLOOR_COLOR, \
 		CB_MAP_DOOR_COLOR, CB_MAP_DOOR_COLOR, CB_MAP_EMPTY_COLOR};
 	int			tile;
@@ -28,7 +28,7 @@ int	_get_color(t_data *data, int *xy)
 
 	tile = data->map->cells[xy[1]][xy[0]];
 	i = 0;
-	while (CB_MAP_EMPTY != tile_arr[i])
+	while (CB_TILE_EMPTY != tile_arr[i])
 	{
 		if (tile == tile_arr[i])
 			return (tile_color[i]);
@@ -86,5 +86,5 @@ void	cb_draw_minimap(t_data *data)
 		2.0 * CB_MAP_TILE_SIZE * player_xydcs[0] - CB_MAP_TILE_SIZE / 2.0);
 	xy[1] = (int)floorf(\
 		2.0 * CB_MAP_TILE_SIZE * player_xydcs[1] - CB_MAP_TILE_SIZE / 2.0);
-	cb_sprite_draw_map(data, player_xydcs, xy);
+	cb_sprite_draw(data, player_xydcs, xy);
 }

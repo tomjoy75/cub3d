@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/06/25 14:14:38 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:33:57 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	cb_data_ptr_ini(void *data_ptr, char *name)
 			&data->img.line_len, &data->img.endian);
 	data->img.width = data->win_width;
 	data->img.height = data->win_height;
-	printf("add ini: %p\n", data->img.addr);//
 	mlx_hook(data->win_ptr, \
 		DestroyNotify, StructureNotifyMask, &_close_window, data);
 	return (CB_RETURN_SUCCESS);

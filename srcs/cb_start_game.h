@@ -1,16 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cb_data_utils.h                                    :+:      :+:    :+:   */
+/*   cb_start_game.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/06/17 15:53:30 by jerperez         ###   ########.fr       */
+/*   Created: 2023/12/17 10:23:11 by jerperez          #+#    #+#             */
+/*   Updated: 2024/07/15 16:01:57 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CB_DATA_UTILS_H
-# define CB_DATA_UTILS_H
+#ifndef cb_start_game_H
+# define cb_start_game_H
+
+# include "cb_data.h"
+
+void	cb_start_game(t_data *data, char dir, int x, int y);
 
 #endif

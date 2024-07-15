@@ -6,7 +6,7 @@
 #    By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/17 15:25:01 by jerperez          #+#    #+#              #
-#    Updated: 2024/07/15 13:17:36 by jerperez         ###   ########.fr        #
+#    Updated: 2024/07/15 16:58:34 by jerperez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,19 +24,19 @@ LIBS		= $(LIBFT) $(MLX)
 LDFLAGS		= -lm -lXext -lX11 
 INCLUDES	= -I./$(LIBFT_DIR) -I./$(MLX_DIR) -I./includes -I./$(SRCDIR)
 
-SRCS_DATA	=	cb_data_ptr_get.c\
-				cb_data_dx.c\
+SRCS_DATA	=	cb_data_mouse_dx.c\
 				cb_data_ptr.c\
-				cb_data_player.c\
+				cb_player.c\
 
 SRCS_RENDER	=	cb_render.c\
 
 SRCS_GRAPHICS	=	cb_draw.c\
 					cb_draw_line.c\
+					cb_draw_line_wall.c\
 					cb_draw_minimap.c\
 					cb_sprite.c
 
-SRCS_HOOK	=	cb_hook.c\
+SRCS_HOOK	=	cb_start_game.c\
 
 SRCS_TEXTURE	=	cb_texture.c\
 
@@ -103,7 +103,7 @@ endif
 
 $(LIBFT) :
 	@echo "Making $(_COLOR_BOLD)$(LIBFT)$(_COLOR_END)."
-	@make all -sC $(LIBFT_DIR)
+	@make bonus -sC $(LIBFT_DIR)
 	@echo "$(_COLOR_GREEN)Ready to use $(_COLOR_BOLD)$@ !$(_COLOR_END)"
 
 $(MLX_DIR) :

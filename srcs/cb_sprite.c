@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 13:03:20 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/10 16:37:54 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/15 16:35:13 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,10 @@
 #include "cb_draw.h"
 #include <stdio.h>
 
-#define	CB_TRIG_0 0.0
-#define	CB_TRIG_1 0.70710678118
-#define	CB_TRIG_2 1.0
-
 static void	_get_tile(t_data *data, int dir, int *tile_xy)
 {
 	const int	tile_x[8] = {2, 3, 4, 5, 6, 7, 0, 1};
-	const int	tile_y[3] = {5, 6, 7};//{1, 2, 3};
+	const int	tile_y[3] = {5, 6, 7};
 
 	tile_xy[0] = tile_x[dir];
 	tile_xy[1] = tile_y[\
@@ -58,24 +54,7 @@ static int	_get_dir(double *player_xydcs)
 	return (i_max);
 }
 
-int	cb_sprite_load(t_data *data, char *path, int ntile_x, int ntile_y)
-{
-	t_sprite	*sprite;
-
-	sprite = data->sprite;
-	if (cb_texture_load(data, &(sprite->img), path))
-		return (1);
-	sprite->ntile_x = ntile_x;
-	sprite->ntile_y = ntile_y;
-	sprite->tile_height = sprite->img.height / ntile_y;
-	sprite->tile_width = sprite->img.width / ntile_x;
-	sprite->transparent_color = 0x000000; //
-	sprite->animation_speed = 100; //
-	sprite->timer = 0;
-	return (0);
-}
-
-void	cb_sprite_draw(t_data *data, t_img *img, int *xy, int *tile_xy)
+void	_draw_tile(t_data *data, t_img *img, int *xy, int *tile_xy)
 {
 	int				tile_dim[2];
 	int				xy_sprite[2];
@@ -103,7 +82,30 @@ void	cb_sprite_draw(t_data *data, t_img *img, int *xy, int *tile_xy)
 	}
 }
 
-void	cb_sprite_draw_map(t_data *data, double *player_xydcs, int *xy)
+/* cb_sprite_load
+ * Loads sprite
+ */
+int	cb_sprite_load(t_data *data, char *path, int ntile_x, int ntile_y)
+{
+	t_sprite	*sprite;
+
+	sprite = data->sprite;
+	if (cb_image_load(data, &(sprite->img), path))
+		return (CB_RETURN_FAILURE);
+	sprite->ntile_x = ntile_x;
+	sprite->ntile_y = ntile_y;
+	sprite->tile_height = sprite->img.height / ntile_y;
+	sprite->tile_width = sprite->img.width / ntile_x;
+	sprite->transparent_color = CB_SPRITE_TRANSPARENT_COLOR;
+	sprite->animation_speed = CB_SPRITE_ANIMATION_SPEED;
+	sprite->timer = 0;
+	return (CB_RETURN_SUCCESS);
+}
+
+/* cb_sprite_draw
+ * Draws sprite
+ */
+void	cb_sprite_draw(t_data *data, double *player_xydcs, int *xy)
 {
 	const int	dir = _get_dir(player_xydcs);
 	int			xy_centered[2];
@@ -112,5 +114,5 @@ void	cb_sprite_draw_map(t_data *data, double *player_xydcs, int *xy)
 	_get_tile(data, dir, tile_xy);
 	xy_centered[0] = xy[0] - data->sprite->tile_width / 2;
 	xy_centered[1] = xy[1] - data->sprite->tile_height / 2;
-	cb_sprite_draw(data, &data->img, xy_centered, tile_xy);
+	_draw_tile(data, &data->img, xy_centered, tile_xy);
 }
