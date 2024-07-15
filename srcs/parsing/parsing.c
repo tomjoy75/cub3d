@@ -6,12 +6,13 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 18:03:45 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/11 15:48:53 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 17:35:31 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
+#include "cb_data.h"
 
 static void	parse_map(t_list *list, t_datap *data, t_flag *flag, int *map_phase)
 {
@@ -70,11 +71,12 @@ t_datap	*parse_cub_file(t_list *list)
 		return (NULL);
 }
 
-t_datap	*parse_file(int argc, char **argv)
+t_data	parse_file(int argc, char **argv)
 {
 	int		fd;
 	t_list	*parsed_lines;
 	t_datap	*data;
+	t_data	data_final;
 
 	fd = cb_check_args(argc, argv);
 	parsed_lines = cb_build_linked_list(fd);
@@ -83,5 +85,6 @@ t_datap	*parse_file(int argc, char **argv)
 		return (NULL);
 	data->map = create_map(data, parsed_lines);
 	ft_lstclear(&parsed_lines, del_content);
-	return (data);
+	//prepare_data ??
+	return (data_final);
 }
