@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cb_hook.h                                          :+:      :+:    :+:   */
+/*   cb_data_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 10:23:11 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 12:59:27 by jerperez         ###   ########.fr       */
+/*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
+/*   Updated: 2024/06/19 11:30:45 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CB_HOOK_H
-# define CB_HOOK_H
+#include "cb_data.h"
+#include <stdio.h> //
 
-# include "cb_data.h"
+void	cb_data_map_get(void *data_ptr)
+{
+	t_data	*data;
+	int		y;
 
-void	cb_hook(t_data *data);
-
-#endif
+	data = (t_data *)data_ptr;
+	return (data->map);
+}

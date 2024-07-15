@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cb_hook.h                                          :+:      :+:    :+:   */
+/*   cb_texture.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 10:23:11 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 12:59:27 by jerperez         ###   ########.fr       */
+/*   Created: 2023/12/16 16:11:36 by jerperez          #+#    #+#             */
+/*   Updated: 2024/06/26 11:47:36 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CB_HOOK_H
-# define CB_HOOK_H
+#ifndef CB_TEXTURE_H
+# define CB_TEXTURE_H
 
-# include "cb_data.h"
+#include "cb_data.h"
 
-void	cb_hook(t_data *data);
+int	cb_texture_load(t_data *data, t_img *img, char *path);
+int	cb_texture_nswe(t_data *data, void *nswe);
 
 #endif

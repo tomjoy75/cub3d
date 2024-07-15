@@ -6,7 +6,7 @@
 #    By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/17 15:25:01 by jerperez          #+#    #+#              #
-#    Updated: 2024/06/17 18:38:53 by jerperez         ###   ########.fr        #
+#    Updated: 2024/07/15 13:17:36 by jerperez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,22 @@ SRCS_DATA	=	cb_data_ptr_get.c\
 
 SRCS_RENDER	=	cb_render.c\
 
+SRCS_GRAPHICS	=	cb_draw.c\
+					cb_draw_line.c\
+					cb_draw_minimap.c\
+					cb_sprite.c
+
 SRCS_HOOK	=	cb_hook.c\
 
-SRCS 	= 	$(SRCS_DATA) $(SRCS_RENDER) $(SRCS_HOOK)
+SRCS_TEXTURE	=	cb_texture.c\
+
+SRCS_COLLISION	=	cb_interact_wall.c\
+					cb_interact_door.c\
+
+SRCS_RC	=	cb_rc.c\
+			cb_rc_cast.c\
+
+SRCS 	= 	$(SRCS_DATA) $(SRCS_RENDER) $(SRCS_HOOK) $(SRCS_GRAPHICS) $(SRCS_TEXTURE) $(SRCS_RC) $(SRCS_COLLISION)
 
 SRC		=	$(addprefix $(SRCDIR)/, $(SRCS))
 
