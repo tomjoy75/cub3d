@@ -1,3 +1,4 @@
 libft/*
 .gitignore
 a.out
+*.o

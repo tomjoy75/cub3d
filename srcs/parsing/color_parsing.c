@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:17:13 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/11 15:41:28 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 20:04:32 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*pass_whitespaces(char *str)
 	return (str);
 }
 
-char	*color_atoi(int *n, char *str, t_list *list, t_datap *data)
+char	*color_atoi(int *n, char *str, t_list *list, t_data *data)
 {
 	*n = 0;
 	while (ft_isdigit(*str))
@@ -38,28 +38,28 @@ void	set_flag_color(char elem, t_flag *flag)
 {
 	if (elem == 'F')
 	{
-		flag->f_color_flag++;
+		flag->floor_color_flag++;
 	}
 	else if (elem == 'C')
 	{
-		flag->c_color_flag++;
+		flag->ceil_color_flag++;
 	}
 }
 
-void	set_datap_color(char elem, t_datap *data, int index, int n)
+void	set_data_color(char elem, t_data *data, int index, int n)
 {
 	if (elem == 'F')
 	{
-		data->f_color += n << ((2 - index) * 8);
+		data->floor_color += n << ((2 - index) * 8);
 	}
 	else if (elem == 'C')
 	{
-		data->c_color += n << ((2 - index) * 8);
+		data->ceil_color += n << ((2 - index) * 8);
 	}
 }
 
 char	*skip_spaces_and_comma(int *index, char *str, t_list *list
-		, t_datap *data)
+		, t_data *data)
 {
 	(*index)++;
 	str = pass_whitespaces(str);

@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:58:52 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/09 13:13:28 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 20:15:19 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	cb_error_msg(char *msg)
 	exit(EXIT_FAILURE);
 }
 
-void	free_map(int ***map, int height, t_datap *data, t_list *list)
+void	free_map(int ***map_temp, int height, t_data *data, t_list *list)
 {
 	free(data->no_text);
 	free(data->so_text);
@@ -31,15 +31,15 @@ void	free_map(int ***map, int height, t_datap *data, t_list *list)
 	free(data);
 	while (height > 0)
 	{
-		free((*map)[height - 1]);
+		free((*map_temp)[height - 1]);
 		height--;
 	}
-	free(*map);
+	free(*map_temp);
 	ft_lstclear(&list, del_content);
 }
 
 // char	*copy_string(char *src)
-void	free_data(t_datap *data)
+void	free_data(t_data *data)
 {
 	int		tmp;
 
@@ -47,21 +47,21 @@ void	free_data(t_datap *data)
 	free(data->so_text);
 	free(data->we_text);
 	free(data->ea_text);
-	if (data->map)
+	if (data->map_temp)
 	{
-		tmp = data->map_height;
+		tmp = data->map->height;
 		while (tmp > 0)
 		{
-			free(data->map[tmp - 1]);
+			free(data->map_temp[tmp - 1]);
 			tmp--;
 		}
-		free(data->map);
-		data->map = NULL;
+		free(data->map_temp);
+		data->map_temp = NULL;
 	}
 	free(data);
 }
 
-void	free_parsing(t_list *list, t_datap *data, char *msg)
+void	free_parsing(t_list *list, t_data *data, char *msg)
 {
 	ft_lstclear(&list, del_content);
 	free(data->no_text);
@@ -72,29 +72,29 @@ void	free_parsing(t_list *list, t_datap *data, char *msg)
 	cb_error_msg(msg);
 }
 
-int	**allocate_map(t_list *list, t_datap *data)
+int	**allocate_map(t_list *list, t_data *data)
 {
-	int	**map;
+	int	**map_temp;
 	int	i;
 
-	map = ft_calloc(data->map_height, sizeof(int *));
-	if (!map)
-		free_parsing(list, data, "map allocation failed");
+	map_temp = ft_calloc(data->map->height, sizeof(int *));
+	if (!map_temp)
+		free_parsing(list, data, "map_temp allocation failed");
 	i = 0;
-	while (i < data->map_height)
+	while (i < data->map->height)
 	{
-		map[i] = ft_calloc(data->map_len, sizeof(int));
-		if (!map[i])
+		map_temp[i] = ft_calloc(data->map->width, sizeof(int));
+		if (!map_temp[i])
 		{
 			while (i > 0)
 			{
-				free(map[i - 1]);
+				free(map_temp[i - 1]);
 				i--;
 			}
-			free(map);
-			free_parsing(list, data, "map allocation failed");
+			free(map_temp);
+			free_parsing(list, data, "map_temp allocation failed");
 		}
 		i++;
 	}
-	return (map);
+	return (map_temp);
 }

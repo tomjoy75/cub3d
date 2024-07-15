@@ -6,14 +6,14 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 19:01:11 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/09 13:13:28 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 19:18:56 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
 
-int	set_no_so_textures(char *str, t_flag *flag, t_datap *data, char *ptr)
+int	set_no_so_textures(char *str, t_flag *flag, t_data *data, char *ptr)
 {
 	if (!ft_strncmp(str, "NO", 2))
 	{
@@ -38,7 +38,7 @@ int	set_no_so_textures(char *str, t_flag *flag, t_datap *data, char *ptr)
 	return (1);
 }
 
-int	set_ea_we_textures(char *str, t_flag *flag, t_datap *data, char *ptr)
+int	set_ea_we_textures(char *str, t_flag *flag, t_data *data, char *ptr)
 {
 	if (!ft_strncmp(str, "WE", 2))
 	{

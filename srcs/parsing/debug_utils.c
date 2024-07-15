@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:18:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/11 15:44:49 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 20:15:19 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	print_flags(t_flag flag)
 {
-	printf("Color flags :\n\tc_color = %d\n\tf_color = %d\n",
-		flag.c_color_flag, flag.f_color_flag);
+	printf("Color flags :\n\tceil_color = %d\n\tfloor_color = %d\n",
+		flag.ceil_color_flag, flag.floor_color_flag);
 	printf("Texture flags :\n\tea_texture = %d\n\tno_texture = %d\n",
 		flag.ea_texture_flag, flag.no_texture_flag);
 	printf("\twe_texture = %d\n\tso_texture = %d\n",
@@ -28,19 +28,19 @@ void	del_content(void *content)
 	free(content);
 }
 
-static void	print_map(t_datap *data)
+static void	print_map(t_data data)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	printf("\n-------MAP-------\n");
-	while (i < data->map_height)
+	while (i < data.map->height)
 	{
 		j = 0;
-		while (j < data->map_len)
+		while (j < data.map->width)
 		{
-			printf ("%+d ", data->map[i][j]);
+			printf ("%+d ", data.map_temp[i][j]);
 			j++;
 		}
 		i++;
@@ -48,20 +48,20 @@ static void	print_map(t_datap *data)
 	}
 }
 
-void	print_datap(t_datap *data)
+void	print_data(t_data data)
 {
-	printf("f_color : (");
-	printf("_%x_", data->f_color);
+	printf("floor_color : (");
+	printf("_%x_", data.floor_color);
 	printf(")\n");
-	printf("c_color : (");
-	printf("_%x_", data->c_color);
+	printf("ceil_color : (");
+	printf("_%x_", data.ceil_color);
 	printf(")\n");
-	printf("no texture : %s\n", data->no_text);
-	printf("so texture : %s\n", data->so_text);
-	printf("we texture : %s\n", data->we_text);
-	printf("ea texture : %s\n", data->ea_text);
-	printf("\nmap dimensions (l*h): %d * %d\n", data->map_len, data->map_height);
+	printf("no texture : %s\n", data.no_text);
+	printf("so texture : %s\n", data.so_text);
+	printf("we texture : %s\n", data.we_text);
+	printf("ea texture : %s\n", data.ea_text);
+	printf("\nmap dimensions (l*h): %d * %d\n", data.map->width, data.map->height);
 	printf("player\tx : %d\n\ty : %d\n\torientation : %c\n",
-		data->pos_x, data->pos_y, data->orientation);
+		data.pos_x, data.pos_y, data.orientation);
 	print_map(data);
 }

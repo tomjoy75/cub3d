@@ -6,13 +6,13 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:28:29 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/09 15:35:35 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 20:19:05 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	destroy_path(t_datap *data)
+void	destroy_path(t_data *data)
 {
 	if (!data)
 		return ;
@@ -38,29 +38,29 @@ void	destroy_path(t_datap *data)
 	}
 }
 
-void	destroy_map(int ***map, int map_height)
+void	destroy_map(int ***map_temp, int height)
 {
 	int	tmp;
 
-	if (!*map)
+	if (!*map_temp)
 		return ;
-	tmp = map_height;
+	tmp = height;
 	while (tmp > 0)
 	{
-		free((*map)[tmp - 1]);
+		free((*map_temp)[tmp - 1]);
 		tmp--;
 	}
-	free(*map);
-	*map = NULL;
+	free(*map_temp);
+	*map_temp = NULL;
 }
 
-void	destroy_datap(t_datap **data)
+void	destroy_data(t_data **data)
 {
 	if (*data)
 	{
 		destroy_path(*data);
-		//TODO: Dois on detruire la map ici? si elle est transmise a une autre structure?
-		destroy_map(&(*data)->map, (*data)->map_height);
+		//TODO: Dois on detruire la map_temp ici? si elle est transmise a une autre structure?
+		destroy_map(&(*data)->map_temp, (*data)->map->height);
 		free (*data);
 		*data = NULL;
 	}

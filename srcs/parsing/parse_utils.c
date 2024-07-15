@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/09 15:41:36 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 20:04:32 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	replace_newline_by_null(char *str)
 	}
 }
 
-int	all_flags_set(t_flag flag, t_datap *data, t_list *list)
+int	all_flags_set(t_flag flag, t_data *data, t_list *list)
 {
-	if (flag.c_color_flag != 3 || flag.f_color_flag != 3
+	if (flag.ceil_color_flag != 3 || flag.floor_color_flag != 3
 		|| flag.ea_texture_flag != 1 || flag.no_texture_flag != 1
 		|| flag.so_texture_flag != 1 || flag.we_texture_flag != 1
 		|| flag.player_flag != 1)
@@ -57,7 +57,7 @@ int	all_flags_set(t_flag flag, t_datap *data, t_list *list)
 		free(data->ea_text);
 		free(data);
 	}
-	if (flag.c_color_flag != 3 || flag.f_color_flag != 3)
+	if (flag.ceil_color_flag != 3 || flag.floor_color_flag != 3)
 		cb_error_msg("1 and only 1 color for floor and ceilling");
 	else if (flag.ea_texture_flag != 1 || flag.no_texture_flag != 1
 		|| flag.so_texture_flag != 1 || flag.we_texture_flag != 1)

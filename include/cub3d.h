@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:26:36 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/11 15:51:30 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 20:27:28 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,103 @@
 # define WALL	1	
 # define DOOR	2	
 
-typedef struct s_datap
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		width;
+	int		height;
+}	t_img;
+
+typedef struct s_map
+{
+	int	width; //TODO:
+	int	height;//TODO:
+	int	**cells;//TODO:
+}	t_map;
+
+typedef struct s_rcline
+{
+	int		draw_bottom;
+	int		draw_top;
+	t_img	*texture;
+	t_img	*foreground;
+	double	texture_x_ratio;
+	int		texture_x;
+	int		foreground_x;
+	int		hit;
+	int		pos_x;
+}	t_rcline;
+
+typedef struct s_minimap
+{
+	int	width;
+	int	height;
+	int	x0;
+	int	y0;
+	int	img;
+}	t_minimap;
+
+typedef struct s_sprite
+{
+	t_img		img;
+	int			transparent_color;
+	int			ntile_x;
+	int			ntile_y;
+	int			tile_width;
+	int			tile_height;
+	int			timer;
+	int			animation_speed;
+}	t_sprite;
+
+typedef struct s_textures
+{
+	t_img	north;
+	t_img	south;
+	t_img	east;
+	t_img	west;
+	t_img	door;
+	// t_img	*anim_sprite;
+	// int		anim_len;
+}	t_textures;
+
+typedef struct s_data
 {
 	char	*no_text;
 	char	*so_text;	
 	char	*we_text;	
 	char	*ea_text;	
-	int		f_color;
-	int		c_color;
-	int		**map;
-	int		map_len;
-	int		map_height;
-	int		pos_x;
-	int		pos_y;
-	char	orientation;
-}				t_datap;
+	int		floor_color;//TODO: Done	
+	int		ceil_color;//TODO: Done	
+	int		**map_temp;
+//	int		map->width;
+//	int		map->height;
+	int		pos_x;//TODO:
+	int		pos_y;//TODO:
+	char	orientation;//TODO:
+// Jerem struct
+	void		*mlx_ptr;
+	void		*win_ptr;
+	int			win_width;
+	int			win_height;
+	int			mouse_x01[2];
+	double		player_xydcs[5];
+	t_textures	*textures;//TODO: w jerem
+	t_sprite	*sprite;
+	t_img		img;
+	t_map		*map;
+}				t_data;
 
 //Memory Gestion
 
 // destroy only the paths name files
-void	destroy_path(t_datap *data);
-// destroy the map
-void	destroy_map(int ***map, int map_height);
+void	destroy_path(t_data *data);
+// destroy the map_temp
+void	destroy_map(int ***map_temp, int height);
 // destroy the structure data for parsing
-void	destroy_datap(t_datap **data);
+void	destroy_data(t_data **data);
 
 #endif
