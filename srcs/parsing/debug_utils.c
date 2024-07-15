@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 12:18:17 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/15 20:15:19 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 21:31:46 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	print_map(t_data data)
 		j = 0;
 		while (j < data.map->width)
 		{
-			printf ("%+d ", data.map_temp[i][j]);
+			printf ("%+d ", data.map->cells[i][j]);
 			j++;
 		}
 		i++;

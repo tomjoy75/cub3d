@@ -65,7 +65,7 @@ int	parse_file(int argc, char **argv, t_data *data)
 	valid_file = parse_cub_file(parsed_lines, data);
 	if (!valid_file)
 		return (1);
-	data->map_temp = create_map(data, parsed_lines);
+	data->map->cells = create_map(data, parsed_lines);
 	ft_lstclear(&parsed_lines, del_content);
 	return (0);
 }

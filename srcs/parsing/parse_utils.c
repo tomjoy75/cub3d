@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/15 20:04:32 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 21:53:27 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	all_flags_set(t_flag flag, t_data *data, t_list *list)
 		free(data->so_text);
 		free(data->we_text);
 		free(data->ea_text);
-		free(data);
+//		free(data);
 	}
 	if (flag.ceil_color_flag != 3 || flag.floor_color_flag != 3)
 		cb_error_msg("1 and only 1 color for floor and ceilling");

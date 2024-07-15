@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:58:52 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/15 20:15:19 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 21:51:12 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_map(int ***map_temp, int height, t_data *data, t_list *list)
 	free(data->so_text);
 	free(data->we_text);
 	free(data->ea_text);
-	free(data);
+//	free(data);
 	while (height > 0)
 	{
 		free((*map_temp)[height - 1]);
@@ -47,18 +47,18 @@ void	free_data(t_data *data)
 	free(data->so_text);
 	free(data->we_text);
 	free(data->ea_text);
-	if (data->map_temp)
+	if (data->map->cells)
 	{
 		tmp = data->map->height;
 		while (tmp > 0)
 		{
-			free(data->map_temp[tmp - 1]);
+			free(data->map->cells[tmp - 1]);
 			tmp--;
 		}
-		free(data->map_temp);
-		data->map_temp = NULL;
+		free(data->map->cells);
+		data->map->cells = NULL;
 	}
-	free(data);
+//	free(data);
 }
 
 void	free_parsing(t_list *list, t_data *data, char *msg)
@@ -68,7 +68,7 @@ void	free_parsing(t_list *list, t_data *data, char *msg)
 	free(data->so_text);
 	free(data->we_text);
 	free(data->ea_text);
-	free (data);
+//	free (data);
 	cb_error_msg(msg);
 }
 

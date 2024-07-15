@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:26:36 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/15 20:27:28 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 21:58:02 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ typedef struct s_img
 
 typedef struct s_map
 {
-	int	width; //TODO:
-	int	height;//TODO:
-	int	**cells;//TODO:
+	int	width; //TODO: OK
+	int	height;//TODO: OK
+	int	**cells;//TODO: OK
 }	t_map;
 
 typedef struct s_rcline
@@ -108,13 +108,9 @@ typedef struct s_data
 	char	*ea_text;	
 	int		floor_color;//TODO: Done	
 	int		ceil_color;//TODO: Done	
-	int		**map_temp;
-//	int		map->width;
-//	int		map->height;
-	int		pos_x;//TODO:
-	int		pos_y;//TODO:
-	char	orientation;//TODO:
-// Jerem struct
+	int		pos_x;//TODO: OK
+	int		pos_y;//TODO: OK
+	char	orientation;//TODO: OK
 	void		*mlx_ptr;
 	void		*win_ptr;
 	int			win_width;
@@ -134,6 +130,6 @@ void	destroy_path(t_data *data);
 // destroy the map_temp
 void	destroy_map(int ***map_temp, int height);
 // destroy the structure data for parsing
-void	destroy_data(t_data **data);
+void	destroy_data(t_data *data);
 
 #endif

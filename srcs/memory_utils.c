@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 14:28:29 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/15 20:19:05 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 21:45:47 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ void	destroy_map(int ***map_temp, int height)
 	*map_temp = NULL;
 }
 
-void	destroy_data(t_data **data)
+void	destroy_data(t_data *data)
 {
-	if (*data)
+	if (data)
 	{
-		destroy_path(*data);
+		destroy_path(data);
 		//TODO: Dois on detruire la map_temp ici? si elle est transmise a une autre structure?
-		destroy_map(&(*data)->map_temp, (*data)->map->height);
-		free (*data);
-		*data = NULL;
+		destroy_map(&data->map->cells, data->map->height);
+	//	free (*data);
+	//	*data = NULL;
 	}
 }

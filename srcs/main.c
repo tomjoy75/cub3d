@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 14:32:29 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/15 21:20:25 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/15 21:41:22 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	main(int argc, char **argv)
 		return (1);
 	// To check parsing
 	print_data(data);
+	destroy_data(&data);
 	// For eof
 /*	destroy_map(&(data->map_temp), data->map->height);
 	destroy_path(data);
-	destroy_data(&data);
 	destroy_data(&data);
 	destroy_path(data);*/
 	return (0);
