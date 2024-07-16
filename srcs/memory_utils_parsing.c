@@ -1,40 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory_utils.c                                     :+:      :+:    :+:   */
+/*   memory_utils_parsing.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:58:52 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/16 11:33:52 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/16 15:29:42 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
 
-void	cb_error_msg(char *msg)
+void	free_map(int ***map_temp, int height)
 {
-	ft_putstr_fd(RED"Error\n"RESET, 2);
-	ft_putstr_fd("\t"ITALIC, 2);
-	ft_putstr_fd(msg, 2);
-	ft_putstr_fd(RESET"\n", 2);
-	exit(EXIT_FAILURE);
-}
-
-void	free_map(int ***map_temp, int height, t_data *data, t_list *list)
-{
-	free(data->no_text);
-	free(data->so_text);
-	free(data->we_text);
-	free(data->ea_text);
 	while (height > 0)
 	{
 		free((*map_temp)[height - 1]);
 		height--;
 	}
 	free(*map_temp);
-	ft_lstclear(&list, del_content);
 }
 
 // char	*copy_string(char *src)
@@ -59,24 +45,31 @@ void	free_data(t_data *data)
 	}
 }
 
-void	free_parsing(t_list *list, t_data *data, char *msg)
-{
-	ft_lstclear(&list, del_content);
-	free(data->no_text);
-	free(data->so_text);
-	free(data->we_text);
-	free(data->ea_text);
-	cb_error_msg(msg);
-}
+// void	free_parsing(t_list *list, t_data *data)
+// {
+// 	ft_lstclear(&list, &free);
+// 	if (NULL != data->no_text)
+// 		free(data->no_text);
+// 	data->no_text = NULL;
+// 	if (NULL != data->so_text)
+// 		free(data->so_text);
+// 	data->so_text = NULL;
+// 	if (NULL != data->we_text)
+// 		free(data->we_text);
+// 	data->we_text = NULL;
+// 	if (NULL != data->ea_text)
+// 		free(data->ea_text);
+// 	data->ea_text = NULL;
+// }
 
-int	**allocate_map(t_list *list, t_data *data)
+int	**allocate_map(t_data *data)
 {
 	int	**map_temp;
 	int	i;
 
 	map_temp = ft_calloc(data->map->height, sizeof(int *));
-	if (!map_temp)
-		free_parsing(list, data, "map_temp allocation failed");
+	if (NULL == map_temp)
+		return (cb_print_err("map memory allocation failed"), NULL);
 	i = 0;
 	while (i < data->map->height)
 	{
@@ -89,7 +82,7 @@ int	**allocate_map(t_list *list, t_data *data)
 				i--;
 			}
 			free(map_temp);
-			free_parsing(list, data, "map_temp allocation failed");
+			return (cb_print_err("map memory allocation failed"), NULL);
 		}
 		i++;
 	}

@@ -6,16 +6,16 @@
 #    By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/17 15:25:01 by jerperez          #+#    #+#              #
-#    Updated: 2024/07/15 16:58:34 by jerperez         ###   ########.fr        #
+#    Updated: 2024/07/16 16:30:43 by jerperez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= cub3D
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -g3 #-Werror
 SRCDIR		= srcs
 OBJDIR		= obj
-LIBFT_DIR	= ./Libft
+LIBFT_DIR	= ./libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 MLX_DIR		= minilibx-linux
 MLX_TAR		= $(MLX_DIR).tgz
@@ -23,6 +23,17 @@ MLX			= $(MLX_DIR)/libmlx.a
 LIBS		= $(LIBFT) $(MLX)
 LDFLAGS		= -lm -lXext -lX11 
 INCLUDES	= -I./$(LIBFT_DIR) -I./$(MLX_DIR) -I./includes -I./$(SRCDIR)
+
+SRCS_PARSING	=	cb_parse.c\
+					cb_parse_color.c\
+					cb_print.c\
+					init.c\
+					memory_utils_parsing.c\
+					memory_utils.c\
+					cb_check_line.c\
+					texture_parsing.c\
+					parse_utils.c\
+					map_creation.c\
 
 SRCS_DATA	=	cb_data_mouse_dx.c\
 				cb_data_ptr.c\
@@ -46,7 +57,7 @@ SRCS_COLLISION	=	cb_interact_wall.c\
 SRCS_RC	=	cb_rc.c\
 			cb_rc_cast.c\
 
-SRCS 	= 	$(SRCS_DATA) $(SRCS_RENDER) $(SRCS_HOOK) $(SRCS_GRAPHICS) $(SRCS_TEXTURE) $(SRCS_RC) $(SRCS_COLLISION)
+SRCS 	= 	$(SRCS_DATA) $(SRCS_RENDER) $(SRCS_HOOK) $(SRCS_GRAPHICS) $(SRCS_TEXTURE) $(SRCS_RC) $(SRCS_COLLISION) $(SRCS_PARSING)
 
 SRC		=	$(addprefix $(SRCDIR)/, $(SRCS))
 

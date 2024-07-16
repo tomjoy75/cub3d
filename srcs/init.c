@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:13:37 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/11 15:45:06 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/16 14:26:40 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "parsing.h"
+#include <string.h>
+#include <errno.h>
 
-static int	_check_suffix_ok(char *argv)
+static int	_check_extension(char *argv)
 {
 	int	len;
 
@@ -23,18 +25,31 @@ static int	_check_suffix_ok(char *argv)
 	return (1);
 }
 
-int	cb_check_args(int argc, char **argv)
+int	cb_open_map(char *path)
 {
 	int		fd;
 
-	if (argc != 2)
-		cb_error_msg("usage: ./cub3D arg1(*.cub)");
-	if (!_check_suffix_ok(argv[1]))
-		cb_error_msg("Wrong input data");
-	fd = open(argv[1], O_RDONLY);
+	if (!_check_extension(path))
+		return (cb_print_err("Wrong file extension"), -1);
+	fd = open(path, O_RDONLY);
 	if (0 >= fd)
-		cb_error_msg("File not found");
+		cb_print_err(strerror(errno));
 	return (fd);
+}
+
+static void	_replace_newline_by_null(char *str)
+{
+	if (str == NULL)
+		return ;
+	while (*str)
+	{
+		if (*str == '\n')
+		{
+			*str = '\0';
+			break ;
+		}
+		str++;
+	}
 }
 
 t_list	*cb_build_linked_list(int fd)
@@ -44,52 +59,21 @@ t_list	*cb_build_linked_list(int fd)
 	t_list	*new_node;
 
 	parsed_lines = NULL;
-	while (1)
+	next_line = ft_get_next_line(fd, 0);
+	while (NULL != next_line)
 	{
-		next_line = ft_get_next_line(fd, 0);
-		if (next_line == NULL)
-			break ;
-		replace_newline_by_null(next_line);
+		_replace_newline_by_null(next_line);
 		new_node = ft_lstnew((void *)next_line);
-		if (!new_node)
+		if (NULL == new_node)
 		{
-			ft_lstclear(&parsed_lines, del_content);
-			cb_error_msg("problem of allocation in linked list");
+			free(next_line);
+			ft_get_next_line(fd, 1);
+			ft_lstclear(&parsed_lines, &free);
+			cb_print_err("problem of allocation in linked list");
+			return (NULL);
 		}
 		ft_lstadd_front(&parsed_lines, new_node);
+		next_line = ft_get_next_line(fd, 0);
 	}
-	close(fd);
 	return (parsed_lines);
 }
-/*
-int	main (int argc, char **argv)
-{
-	int		fd;
-	char	*next_line;
-	int		count;
-
-	if (argc != 2)
-		return (1);
-	if (!_check_suffix_ok(argv[1]))
-	{
-		printf("Wrong input data\n");
-		return(1);
-	}
-	count = 0;
-	fd = open(argv[1], O_RDONLY);
-	if (0 >= fd)
-	{
-		printf("File not found\n");
-		return (1);
-	}
-	while (1)
-	{
-		next_line = ft_get_next_line(fd, 0);
-		if (next_line == NULL)
-			break;
-		printf("Line %d : %s\n", count, next_line);
-		count++;
-	}	
-	close(fd);
-	return (0);
-}*/

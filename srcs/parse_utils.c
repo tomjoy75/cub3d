@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cb_start_game.h                                          :+:      :+:    :+:   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 10:23:11 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 16:01:57 by jerperez         ###   ########.fr       */
+/*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
+/*   Updated: 2024/07/16 14:12:43 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef cb_start_game_H
-# define cb_start_game_H
+#include "cub3d.h"
+#include "parsing.h"
 
-# include "cb_data.h"
+int	is_whitespace(char c)
+{
+	return ((c >= 9 && c <= 13) || c == 32);
+}
 
-void	cb_start_game(t_data *data);
+int	is_walkable(int tile)
+{
+	return (tile == FLOOR || tile == DOOR);
+}
 
-#endif

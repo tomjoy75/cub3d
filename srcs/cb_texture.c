@@ -6,13 +6,14 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 17:47:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 16:36:34 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:55:38 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "cb_utils.h"
 #include "cb_data.h"
+#include "parsing.h"
 #include <stdlib.h>
 #include <stdio.h> //
 
@@ -25,11 +26,11 @@ int	cb_image_load(t_data *data, t_img *img, char *path)
 	img->mlx_img = mlx_xpm_file_to_image(\
 		data->mlx_ptr, path, &img->width, &img->height);
 	if (NULL == img->mlx_img)
-		return (CB_RETURN_FAILURE);
+		return (cb_print_err("mlx: failed to create image"), CB_RETURN_FAILURE);
 	img->addr = mlx_get_data_addr(\
 		img->mlx_img, &img->bpp, &img->line_len, &img->endian);
 	if (NULL == img->addr)
-		return (CB_RETURN_FAILURE);
+		return (cb_print_err("mlx: failed get image data"), CB_RETURN_FAILURE);
 	return (CB_RETURN_SUCCESS);
 }
 

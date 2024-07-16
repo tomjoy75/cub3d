@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 17:25:59 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:43:54 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,26 +76,49 @@ typedef struct s_textures
 	// int		anim_len;
 }	t_textures;
 
+// typedef struct s_data
+// {
+// 	void		*mlx_ptr;
+// 	void		*win_ptr;
+// 	int			win_width;
+// 	int			win_height;
+// 	int			mouse_x01[2];
+// 	double		player_xydcs[5];
+// 	int			ceil_color;
+// 	int			floor_color;
+// 	int			enable_mouse;
+// 	t_textures	*textures;
+// 	t_sprite	*sprite;
+// 	t_img		img;
+// 	t_map		*map;
+// }	t_data;
+
 typedef struct s_data
 {
+	int			show_minimap;
+	char		*no_text;
+	char		*so_text;	
+	char		*we_text;	
+	char		*ea_text;	
+	int			floor_color;
+	int			ceil_color;
+	int			pos_x;
+	int			pos_y;
+	char		dir;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	int			win_width;
 	int			win_height;
 	int			mouse_x01[2];
 	double		player_xydcs[5];
-	int			ceil_color;
-	int			floor_color;
-	int			enable_mouse;
 	t_textures	*textures;
 	t_sprite	*sprite;
 	t_img		img;
 	t_map		*map;
-}	t_data;
-
+}				t_data;
 
 void	cb_data_ptr_destroy(void *data);
-int		cb_data_ptr_ini(void *data_ptr, char *name);
+int		cb_data_ptr_ini(t_data *data, char *name);
 void	*cb_data_ptr_win_get(void *data_ptr);
 void	*cb_data_ptr_mlx_get(void *data_ptr);
 void	*cb_data_ptr_img_get(void *data_ptr);

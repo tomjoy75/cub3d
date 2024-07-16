@@ -6,13 +6,14 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 16:33:57 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:44:24 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "cb_utils.h"
 #include "cb_data.h"
+#include "cub3d.h"
 #include <stddef.h>
 #include <X11/X.h>
 #include <stdlib.h>
@@ -34,17 +35,31 @@ void	cb_data_ptr_destroy(void *data_ptr)
 	data->win_ptr = NULL;
 	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 	data->img.mlx_img = NULL;
+	//
+	mlx_destroy_image(data->mlx_ptr, data->textures->door.mlx_img);
+	data->textures->door.mlx_img = NULL;
+	mlx_destroy_image(data->mlx_ptr, data->textures->north.mlx_img);
+	data->textures->north.mlx_img = NULL;
+	mlx_destroy_image(data->mlx_ptr, data->textures->south.mlx_img);
+	data->textures->south.mlx_img = NULL;
+	mlx_destroy_image(data->mlx_ptr, data->textures->east.mlx_img);
+	data->textures->east.mlx_img = NULL;
+	mlx_destroy_image(data->mlx_ptr, data->textures->west.mlx_img);
+	data->textures->west.mlx_img = NULL;
+	mlx_destroy_image(data->mlx_ptr, data->sprite->img.mlx_img);
+	data->sprite->img.mlx_img = NULL;
+	//
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	data->mlx_ptr = NULL;
+	if (NULL != data->map->cells)
+		destroy_map(&data->map->cells, data->map->height);
+	data->map->cells = NULL;
 }
 
-int	cb_data_ptr_ini(void *data_ptr, char *name)
+int	cb_data_ptr_ini(t_data *data, char *name)
 {
-	t_data	*data;
-
-	data = (t_data *)data_ptr;
-	data->mlx_ptr = mlx_init();
+	//data->mlx_ptr = mlx_init();
 	if (NULL == data->mlx_ptr)
 		return (CB_RETURN_FAILURE);
 	data->win_ptr = mlx_new_window(\

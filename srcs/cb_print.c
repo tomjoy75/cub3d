@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cb_start_game.h                                          :+:      :+:    :+:   */
+/*   cb_print.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 10:23:11 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 16:01:57 by jerperez         ###   ########.fr       */
+/*   Created: 2024/07/06 16:58:52 by joyeux            #+#    #+#             */
+/*   Updated: 2024/07/16 12:28:16 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef cb_start_game_H
-# define cb_start_game_H
+#include "cub3d.h"
+#include "parsing.h"
 
-# include "cb_data.h"
-
-void	cb_start_game(t_data *data);
-
-#endif
+void	cb_print_err(char *msg)
+{
+	ft_putstr_fd(RED"Error\n"RESET, 2);
+	ft_putstr_fd("\t"ITALIC, 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd(RESET"\n", 2);
+}

@@ -38,6 +38,8 @@ static int	_keypress(int keysym, t_data *data)
 		cb_player_strafe(data, -CB_PLAYER_SPEED, 0.0);
 	else if (XK_d == keysym || XK_d == keysym)
 		cb_player_strafe(data, 0.0, -CB_PLAYER_SPEED);
+	else if (XK_m == keysym || XK_M == keysym)
+		data->show_minimap = !(data->show_minimap);
 	else if (XK_Left == keysym)
 		cb_player_turn(data, -CB_PLAYER_LR_TURN);
 	else if (XK_Right == keysym)
@@ -64,7 +66,8 @@ static int	_update(t_data *data)
 			cb_player_turn(data, dx);
 			cb_rc(data, &data->img);
 		}
-		cb_draw_minimap(data);
+		if (data->show_minimap)
+			cb_draw_minimap(data);
 		cb_render(data);
 	}
 	return (CB_RETURN_SUCCESS);
@@ -73,7 +76,7 @@ static int	_update(t_data *data)
 /* cb_start_game
  * Starts game
  */
-void	cb_start_game(t_data *data, char dir, int x, int y)
+void	cb_start_game(t_data *data)
 {
 	void	*win_ptr;
 	void	*mlx_ptr;
@@ -82,8 +85,10 @@ void	cb_start_game(t_data *data, char dir, int x, int y)
 	mlx_ptr = data->mlx_ptr;
 	mlx_mouse_hide(mlx_ptr, win_ptr);
 	cb_data_mouse_dx_ini(data);
-	cb_player_pos_ini(data, x + CB_PLAYER_START_OFFX, y + CB_PLAYER_START_OFFY);
-	cb_player_angle_ini(data, dir);
+	cb_player_pos_ini(data, \
+						data->pos_x + CB_PLAYER_START_OFFX, \
+						data->pos_y + CB_PLAYER_START_OFFY);
+	cb_player_angle_ini(data, data->dir);
 	mlx_hook(win_ptr, KeyPress, KeyPressMask, &_keypress, data);
 	cb_rc(data, &data->img);
 	mlx_loop_hook(mlx_ptr, &_update, data);

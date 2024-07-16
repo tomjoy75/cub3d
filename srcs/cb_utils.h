@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/16 11:38:22 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/16 16:01:55 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define CB_MAP_FLOOR_COLOR 0x00FF00
 # define CB_MAP_DOOR_COLOR 0x0000FF
 # define CB_SPRITE_TRANSPARENT_COLOR 0x000000
-# define CB_SPRITE_ANIMATION_SPEED 5000 // win_update / sprite_update
+# define CB_SPRITE_ANIMATION_SPEED 3000 // win_update / sprite_update
 // Control
 # define CB_MOUSE_SENSIBILITY 0.01
 // Other
