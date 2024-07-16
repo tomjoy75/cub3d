@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 22:38:17 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/15 21:28:45 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/16 11:33:03 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,10 @@ static int	_wrong_elem_around(int **map_temp, t_data *data, int i, int j)
 			|| map_temp[j][i + 1] == EMPTY))
 			return (1);
 		else if (map_temp[j][i] == EMPTY && (\
-			_is_walkable(map_temp[j][i - 1]) || _is_walkable(map_temp[j][i + 1]) || \
-			_is_walkable(map_temp[j - 1][i]) || _is_walkable(map_temp[j + 1][i])))
+			_is_walkable(map_temp[j][i - 1]) || \
+			_is_walkable(map_temp[j][i + 1]) || \
+			_is_walkable(map_temp[j - 1][i]) || \
+			_is_walkable(map_temp[j + 1][i])))
 			return (1);
 	}
 	return (0);

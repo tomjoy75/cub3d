@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:26:36 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/15 21:58:02 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/16 10:35:44 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ typedef struct s_img
 
 typedef struct s_map
 {
-	int	width; //TODO: OK
-	int	height;//TODO: OK
-	int	**cells;//TODO: OK
+	int	width;
+	int	height;
+	int	**cells;
 }	t_map;
 
 typedef struct s_rcline
@@ -96,28 +96,26 @@ typedef struct s_textures
 	t_img	east;
 	t_img	west;
 	t_img	door;
-	// t_img	*anim_sprite;
-	// int		anim_len;
 }	t_textures;
 
 typedef struct s_data
 {
-	char	*no_text;
-	char	*so_text;	
-	char	*we_text;	
-	char	*ea_text;	
-	int		floor_color;//TODO: Done	
-	int		ceil_color;//TODO: Done	
-	int		pos_x;//TODO: OK
-	int		pos_y;//TODO: OK
-	char	orientation;//TODO: OK
+	char		*no_text;
+	char		*so_text;	
+	char		*we_text;	
+	char		*ea_text;	
+	int			floor_color;
+	int			ceil_color;
+	int			pos_x;
+	int			pos_y;
+	char		orientation;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	int			win_width;
 	int			win_height;
 	int			mouse_x01[2];
 	double		player_xydcs[5];
-	t_textures	*textures;//TODO: w jerem
+	t_textures	*textures;
 	t_sprite	*sprite;
 	t_img		img;
 	t_map		*map;
