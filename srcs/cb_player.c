@@ -36,8 +36,8 @@ void	cb_player_angle_ini(t_data *data, char dir)
 	const double	a[5] = {CB_WEST_ANGLE, CB_NORTH_ANGLE, \
 							CB_EAST_ANGLE, CB_SOUTH_ANGLE, \
 							CB_SOUTH_ANGLE};
-	const double	c[5] = {1.0, 0.0, -1.0, 0.0, 0.0};
-	const double	s[5] = {0.0, 1.0, 0.0, -1.0, -1.0};
+	const double	c[5] = {-1.0, 0.0, 1.0, 0.0, 0.0};
+	const double	s[5] = {0.0, -1.0, 0.0, 1.0, 1.0};
 	int				i;
 
 	i = 0;
