@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/17 17:04:00 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 19:53:56 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 // Player
 # define CB_PLAYER_SPEED 0.1 //Tile/Frame
 # define CB_PLAYER_LR_TURN 10 //pixel
-# define CB_PLAYER_START_OFFX 0.5
-# define CB_PLAYER_START_OFFY 0.5
+# define CB_PLAYER_START_OFFX 0.50001
+# define CB_PLAYER_START_OFFY 0.50001
 // Distances
 # define CB_COLLISION_TOL 0.001 // tiles
 # define CB_DOOR_OPEN_DIST 0.5 //Tile
