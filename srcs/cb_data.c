@@ -1,65 +1,65 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cb_data_ptr.c                                      :+:      :+:    :+:   */
+/*   cb_data.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/16 16:44:24 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:56:49 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
-#include "cb_utils.h"
+#include "cb_constants.h"
+#include "cb_graphics.h"
 #include "cb_data.h"
-#include "cub3d.h"
+#include "cb_parsing.h"
 #include <stddef.h>
 #include <X11/X.h>
 #include <stdlib.h>
-#include <stdio.h> //
 
 static int	_close_window(void *data)
 {
-	cb_data_ptr_destroy(data);
+	cb_data_destroy(data);
 	exit(EXIT_SUCCESS);
 	return (CB_RETURN_FAILURE);
 }
 
-void	cb_data_ptr_destroy(void *data_ptr)
+int	cb_data_check_oob(t_data *data, int *xy_map)
 {
-	t_data	*data;
+	return (0 > xy_map[0] || 0 > xy_map[1] \
+			|| data->map->width <= xy_map[0] || data->map->height <= xy_map[1]);
+}
 
-	data = (t_data *)data_ptr;
+void	cb_data_destroy(t_data *data)
+{
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	data->win_ptr = NULL;
-	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
-	data->img.mlx_img = NULL;
-	//
-	mlx_destroy_image(data->mlx_ptr, data->textures->door.mlx_img);
-	data->textures->door.mlx_img = NULL;
-	mlx_destroy_image(data->mlx_ptr, data->textures->north.mlx_img);
-	data->textures->north.mlx_img = NULL;
-	mlx_destroy_image(data->mlx_ptr, data->textures->south.mlx_img);
-	data->textures->south.mlx_img = NULL;
-	mlx_destroy_image(data->mlx_ptr, data->textures->east.mlx_img);
-	data->textures->east.mlx_img = NULL;
-	mlx_destroy_image(data->mlx_ptr, data->textures->west.mlx_img);
-	data->textures->west.mlx_img = NULL;
-	mlx_destroy_image(data->mlx_ptr, data->sprite->img.mlx_img);
-	data->sprite->img.mlx_img = NULL;
-	//
+	cb_image_destroy(data, &data->img);
+	if (NULL != data->textures)
+	{
+		cb_image_destroy(data, &data->textures->door);
+		cb_image_destroy(data, &data->textures->north);
+		cb_image_destroy(data, &data->textures->south);
+		cb_image_destroy(data, &data->textures->east);
+		cb_image_destroy(data, &data->textures->west);
+	}
+	data->textures = NULL;
+	if (NULL != data->sprite)
+		cb_image_destroy(data, &data->sprite->img);
+	data->sprite = NULL;
 	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
+	if (NULL != data->mlx_ptr)
+		free(data->mlx_ptr);
 	data->mlx_ptr = NULL;
 	if (NULL != data->map->cells)
-		destroy_map(&data->map->cells, data->map->height);
+		cb_map_free(&data->map->cells, data->map->height);
 	data->map->cells = NULL;
 }
 
-int	cb_data_ptr_ini(t_data *data, char *name)
+int	cb_data_ini(t_data *data, char *name)
 {
-	//data->mlx_ptr = mlx_init();
 	if (NULL == data->mlx_ptr)
 		return (CB_RETURN_FAILURE);
 	data->win_ptr = mlx_new_window(\

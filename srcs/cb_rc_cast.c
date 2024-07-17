@@ -6,15 +6,15 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 13:03:20 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 12:02:17 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:04:35 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cb_data.h"
-#include "cb_utils.h"
-#include "cb_rc.h"
+#include "cb_constants.h"
+#include "cb_raycaster.h"
+#include "cb_graphics_utils.h"
 #include <math.h>
-#include <stdio.h> //
 
 static int	_collision_check_y(t_ray *ray)
 {

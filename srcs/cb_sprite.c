@@ -6,15 +6,14 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 13:03:20 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 16:35:13 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 13:50:56 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cb_utils.h"
+#include "cb_constants.h"
 #include "cb_data.h"
-#include "cb_texture.h"
-#include "cb_draw.h"
-#include <stdio.h>
+#include "cb_graphics.h"
+#include "cb_graphics.h"
 
 static void	_get_tile(t_data *data, int dir, int *tile_xy)
 {

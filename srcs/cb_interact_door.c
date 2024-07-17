@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cb_utils.h"
+#include "cb_constants.h"
 #include "cb_data.h"
 #include "cb_interact.h"
 #include <math.h>
-#include <stdio.h> //
 
 void	_change_tile(t_data *data, double *xy, double *dxy, int tile)
 {

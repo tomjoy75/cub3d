@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cb_window.h                                        :+:      :+:    :+:   */
+/*   cb_print.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/16 16:11:36 by jerperez          #+#    #+#             */
-/*   Updated: 2024/06/17 16:29:52 by jerperez         ###   ########.fr       */
+/*   Created: 2024/06/17 15:26:36 by tjoyeux           #+#    #+#             */
+/*   Updated: 2024/07/17 14:26:03 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CB_WINDOW_H
-# define CB_WINDOW_H
+#ifndef CB_PRINT_H
+# define CB_PRINT_H
 
-int	cb_new_window(void *data);
-
-
+void	cb_print_err(char *msg);
 
 #endif

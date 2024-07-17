@@ -6,12 +6,11 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:38:36 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 13:39:41 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 12:27:57 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cb_data.h"
-#include <stdio.h> //
 
 /* cb_draw_pix_color_get
  * Get color from picture at pixel

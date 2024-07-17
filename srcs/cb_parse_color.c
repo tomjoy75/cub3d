@@ -6,23 +6,17 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 13:17:13 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/16 17:00:41 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:27:58 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "parsing.h"
-#include "cb_utils.h"
-#include <stdio.h> //
+//#include "cub3d.h"
+//#include "cb_parsing.h" //
+#include "cb_parsing_utils.h"
+#include "cb_constants.h"
+#include "cb_print.h"
 
-char	*pass_whitespaces(char *str)
-{
-	while (is_whitespace(*str))
-		str++;
-	return (str);
-}
-
-char	*color_atoi(int *n, char **str)
+char	*cb_color_atoi(int *n, char **str)
 {
 	*n = 0;
 	while (ft_isdigit(**str))
@@ -36,7 +30,7 @@ char	*color_atoi(int *n, char **str)
 	return (*str);
 }
 
-int	set_data_color(char elem, t_data *data, int index, int n)
+int	cb_color_set(char elem, t_data *data, int index, int n)
 {
 	int	*color_ptr;
 
@@ -57,10 +51,16 @@ int	set_data_color(char elem, t_data *data, int index, int n)
 	return (CB_RETURN_SUCCESS);
 }
 
-char	*skip_spaces_and_comma(int index, char *str)
+char	*cb_skip_whitespaces(char *str)
 {
-	//printf("skip_spaces_and_comma:%d\t%s\n", index, str); //
-	str = pass_whitespaces(str);
+	while (is_whitespace(*str))
+		str++;
+	return (str);
+}
+
+char	*cb_skip_rgb_delimiter(int index, char *str)
+{
+	str = cb_skip_whitespaces(str);
 	if (',' == *str && 3 == index)
 		return (cb_print_err("color format must be [R],[G],[B]"), NULL);
 	else if (',' != *str && index < 3)

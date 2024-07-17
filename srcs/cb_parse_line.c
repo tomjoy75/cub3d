@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cb_check_line.c                                    :+:      :+:    :+:   */
+/*   cb_parse_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/16 16:55:01 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:30:32 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "parsing.h"
+//#include "cb_parsing.h"
+#include "cb_parsing_utils.h"
+#include "cb_print.h"
 #include "cb_data.h"
-#include "cb_utils.h"
-#include "cb_texture.h"
-#include <stdio.h> //
+#include "cb_constants.h"
+#include "cb_graphics.h"
 
 static int	_is_color_line(char *str, t_data *data)
 {
@@ -23,24 +23,24 @@ static int	_is_color_line(char *str, t_data *data)
 	int			n;
 	int			index;
 
-	if (elem != 'F' && elem != 'C')
+	if (elem != CB_ELEMENT_FLOOR && elem != CB_ELEMENT_CEIL)
 		return (0);
 	str++;
 	index = 0;
 	while (index < 3)
 	{
-		str = pass_whitespaces(str);
+		str = cb_skip_whitespaces(str);
 		if (!ft_isdigit(*str))
 			return (cb_print_err("color line is not correctly formatted"), -1);
-		if (NULL == color_atoi(&n, &str))
+		if (NULL == cb_color_atoi(&n, &str))
 			return (-1);
-		if (set_data_color(elem, data, index, n))
+		if (cb_color_set(elem, data, index, n))
 			return (-1);
-		str = skip_spaces_and_comma(++index, str);
+		str = cb_skip_rgb_delimiter(++index, str);
 		if (NULL == str)
 			return (-1);
 	}
-	str = pass_whitespaces(str);
+	str = cb_skip_whitespaces(str);
 	if (*str && *str != '\n')
 		return (cb_print_err("color line is not correctly formatted"), -1);
 	return (1);
@@ -50,7 +50,8 @@ static int	_is_texture_line(char *str, t_flag *flag, t_data *data)
 {
 	const t_img	*img_ptr[4] = {&data->textures->north, &data->textures->south, \
 								&data->textures->west, &data->textures->east};
-	const char	*tag[5] = {"NO", "SO", "WE", "EA", NULL};
+	const char	*tag[5] = {CB_ELEMENT_NORTH, CB_ELEMENT_SOUTH, \
+							CB_ELEMENT_WEST, CB_ELEMENT_EAST, NULL};
 	const int	*loaded[4] = {&flag->no_texture_flag, &flag->so_texture_flag, \
 								&flag->we_texture_flag, &flag->ea_texture_flag};
 	char		*ptr;
@@ -86,7 +87,7 @@ int	cb_check_line_space(char *str)
 }
 
 // Check for elements space_line, texture_line, color_line
-int	cb_check_line_element(char *str, t_flag *flag, t_data *data)
+int	cb_parse_line_element(char *str, t_flag *flag, t_data *data)
 {
 	int	ret;
 
@@ -107,13 +108,13 @@ int	cb_check_line_element(char *str, t_flag *flag, t_data *data)
 }
 
 // there should be only '0,'1',' ', 'N''S''E'or 'W' (only one in the map_temp)
-int	cb_check_line_map(char *str, t_flag *flag)
+int	cb_parse_line_map(char *str, t_flag *flag)
 {
 	while (*str && *str != '\n')
 	{
-		if (!ft_strchr(CB_MAP_VALID_CHAR, *str))
+		if (!ft_strchr(CB_MAP_VALID_CHAR""CB_ELEMENT_PLAYER, *str))
 			return (0);
-		if (ft_strchr("NSEW", *str))
+		if (ft_strchr(CB_ELEMENT_PLAYER, *str))
 			flag->player_flag++;
 		str++;
 	}
