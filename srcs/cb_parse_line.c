@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cb_parse_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:28:41 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/17 14:30:32 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:29:16 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static int	_is_texture_line(char *str, t_flag *flag, t_data *data)
 		i++;
 	if (NULL == tag[i] || NULL == img_ptr[i])
 		return (0);
+	crop_end(str);
 	ptr = str + 2;
 	if (!is_whitespace(*ptr))
 		return (0);
@@ -71,8 +72,7 @@ static int	_is_texture_line(char *str, t_flag *flag, t_data *data)
 		return (cb_print_err("attempted to redefine texture path"), -1);
 	if (cb_image_load(data, (t_img *)(img_ptr[i]), (char *)ptr))
 		return (-1);
-	*((int *)loaded[i]) += 1;
-	return (1);
+	return (*((int *)loaded[i]) += 1, *ptr != '\0');
 }
 
 int	cb_check_line_space(char *str)
