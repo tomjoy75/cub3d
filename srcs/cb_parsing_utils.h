@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cb_parsing_utils.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 19:15:41 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/17 14:22:26 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:24:40 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		cb_map_file_open(char *path);
 t_list	*cb_map_file_read(int fd);
 //Utils
 int		is_whitespace(char c);
+void	crop_end(char *str);
 //Memory utils
 int		**cb_map_calloc(t_data *data);
 //Check lines

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cb_parsing_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/17 17:07:24 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:24:58 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,16 @@ int	is_whitespace(char c)
 int	is_walkable(int tile)
 {
 	return (tile == CB_TILE_FLOOR || tile == CB_TILE_DOOR_OPEN);
+}
+
+void	crop_end(char *str)
+{
+	char	*ptr;
+
+	ptr = str + ft_strlen(str) - 1;
+	while (is_whitespace(*ptr))
+	{
+		*ptr = '\0';
+		ptr--;
+	}
 }

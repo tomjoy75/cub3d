@@ -6,13 +6,13 @@
 #    By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/17 15:25:01 by jerperez          #+#    #+#              #
-#    Updated: 2024/07/17 17:00:49 by jerperez         ###   ########.fr        #
+#    Updated: 2024/07/17 17:44:36 by tjoyeux          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= cub3D
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g3
 D_BONUS		= -D CB_BONUS_ENABLED=1
 SRCDIR		= srcs
 OBJDIR		= obj
