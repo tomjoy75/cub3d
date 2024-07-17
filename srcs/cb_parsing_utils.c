@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*   cb_parsing_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/16 14:12:43 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:07:24 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "parsing.h"
+#include "cb_parsing_utils.h"
+#include "cb_constants.h"
 
 int	is_whitespace(char c)
 {
@@ -20,6 +20,5 @@ int	is_whitespace(char c)
 
 int	is_walkable(int tile)
 {
-	return (tile == FLOOR || tile == DOOR);
+	return (tile == CB_TILE_FLOOR || tile == CB_TILE_DOOR_OPEN);
 }
-

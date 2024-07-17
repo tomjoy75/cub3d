@@ -1,41 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   cb_map_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:13:37 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/16 14:26:40 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:06:46 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "parsing.h"
+#include "cb_print.h"
+#include "cb_parsing_utils.h"
+#include "cb_constants.h"
 #include <string.h>
 #include <errno.h>
-
-static int	_check_extension(char *argv)
-{
-	int	len;
-
-	len = ft_strlen(argv);
-	if (len < 4 || ft_strncmp(argv + len - 4, ".cub", 4))
-		return (0);
-	return (1);
-}
-
-int	cb_open_map(char *path)
-{
-	int		fd;
-
-	if (!_check_extension(path))
-		return (cb_print_err("Wrong file extension"), -1);
-	fd = open(path, O_RDONLY);
-	if (0 >= fd)
-		cb_print_err(strerror(errno));
-	return (fd);
-}
+#include <fcntl.h>
 
 static void	_replace_newline_by_null(char *str)
 {
@@ -52,7 +32,31 @@ static void	_replace_newline_by_null(char *str)
 	}
 }
 
-t_list	*cb_build_linked_list(int fd)
+static int	_check_extension(char *argv)
+{
+	const int	len_extension = ft_strlen(CB_MAP_EXTENSION);
+	int			len;
+
+	len = ft_strlen(argv);
+	if (len < len_extension)
+		return (CB_RETURN_FAILURE);
+	return (ft_strncmp(\
+		argv + len - len_extension, CB_MAP_EXTENSION, len_extension));
+}
+
+int	cb_map_file_open(char *path)
+{
+	int		fd;
+
+	if (_check_extension(path))
+		return (cb_print_err("Wrong file extension"), -1);
+	fd = open(path, O_RDONLY);
+	if (0 >= fd)
+		cb_print_err(strerror(errno));
+	return (fd);
+}
+
+t_list	*cb_map_file_read(int fd)
 {
 	char	*next_line;
 	t_list	*parsed_lines;

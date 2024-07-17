@@ -6,17 +6,19 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 16:58:52 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/16 12:28:16 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:11:54 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "parsing.h"
+//#include "cub3d.h"
+#include "cb_constants.h"
+#include "cb_parsing_utils.h"
+#include "libft.h"
 
 void	cb_print_err(char *msg)
 {
-	ft_putstr_fd(RED"Error\n"RESET, 2);
-	ft_putstr_fd("\t"ITALIC, 2);
+	ft_putstr_fd(CB_TERM_RED"Error\n"CB_TERM_RESET, 2);
+	ft_putstr_fd("\t"CB_TERM_ITALIC, 2);
 	ft_putstr_fd(msg, 2);
-	ft_putstr_fd(RESET"\n", 2);
+	ft_putstr_fd(CB_TERM_RESET"\n", 2);
 }

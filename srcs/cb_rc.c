@@ -6,17 +6,18 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 13:03:20 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 17:02:48 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:17:58 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cb_data.h"
-#include "cb_draw.h"
-#include "cb_rc.h"
-#include <math.h>
+#include "cb_graphics.h"
+#include "cb_graphics_utils.h"
+#include "cb_raycaster.h"
 #include "libft.h"
-#include "cb_utils.h"
-#include <stdio.h> //
+#include "cb_constants.h"
+#include <math.h>
+#include <stdio.h>
 
 static void	_get_wall(t_data *data, t_ray *ray, t_rcline *line)
 {
@@ -24,7 +25,7 @@ static void	_get_wall(t_data *data, t_ray *ray, t_rcline *line)
 	int			line_height;
 
 	if (0.0 >= ray->plane_distance)
-		line_height = h; // inf
+		line_height = h;
 	else
 		line_height = (int)floorf(h / ray->plane_distance);
 	line->draw_top = -line_height / 2 + h / 2;
@@ -75,18 +76,15 @@ static int	_ini_player(t_data *data, t_ray *ray, const double *player_xydcs)
 	ray->camera_sin = player_xydcs[CB_PLAYER_SIN_INDEX];
 	ray->pos_x = player_xydcs[CB_PLAYER_X_INDEX];
 	ray->pos_y = player_xydcs[CB_PLAYER_Y_INDEX];
-	ray->map_x = (int)roundf(ray->pos_x);
-	ray->map_y = (int)roundf(ray->pos_y);
+	ray->map_x = (int)floorf(ray->pos_x);
+	ray->map_y = (int)floorf(ray->pos_y);
 	ray->oob_x = data->map->width;
 	ray->oob_y = data->map->height;
 	if (0 > ray->map_x || 0 > ray->map_y \
 		|| ray->map_x >= data->map->width || ray->map_y >= data->map->height)
-		return (CB_RETURN_FAILURE);
-	if (CB_TILE_EMPTY == data->map->cells[ray->map_y][ray->map_x])
-		return (CB_RETURN_FAILURE);
+		return (cb_data_player_ini(data), CB_RETURN_FAILURE);
 	return (CB_RETURN_SUCCESS);
 }
-
 
 /* cb_rc
  * Raycaster, sends win_width rays and draws
@@ -98,8 +96,6 @@ void	cb_rc(t_data *data, t_img *img)
 	const int		win_width = data->win_width;
 	const double	*player_xydcs = data->player_xydcs;
 
-	ft_memset(&line, 0, sizeof(t_rcline)); //
-	ft_memset(&ray, 0, sizeof(t_ray)); //
 	if (_ini_player(data, &ray, player_xydcs))
 		return ;
 	ray.ray_index = 0;

@@ -6,17 +6,19 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 11:34:55 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/16 16:32:43 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:27:42 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "parsing.h"
-#include "cb_utils.h"
+//#include "cub3d.h"
+//#include "cb_parsing.h"
+#include "cb_print.h"
+#include "cb_parsing_utils.h"
+#include "cb_constants.h"
 
 static void	_parse_map(t_list *list, t_data *data, t_flag *flag, int *map_phase)
 {
-	if (!cb_check_line_map((char *)list->content, flag)
+	if (!cb_parse_line_map((char *)list->content, flag)
 		|| cb_check_line_space((char *)list->content))
 	{
 		*map_phase = 0;
@@ -54,7 +56,7 @@ static int	_parse_cub_file(t_list *list, t_data *data)
 	{
 		if (is_map)
 			_parse_map(list, data, &flag, &is_map);
-		else if (!cb_check_line_element((char *)list->content, &flag, data))
+		else if (!cb_parse_line_element((char *)list->content, &flag, data))
 			return (CB_RETURN_FAILURE);
 		list = list->next;
 	}
@@ -73,16 +75,16 @@ int	cb_parse_file(char *path, t_data *data)
 	int		fd;
 	t_list	*parsed_lines;
 
-	fd = cb_open_map(path);
+	fd = cb_map_file_open(path);
 	if (0 >= fd)
 		return (CB_RETURN_FAILURE);
-	parsed_lines = cb_build_linked_list(fd);
+	parsed_lines = cb_map_file_read(fd);
 	close(fd);
 	if (NULL == parsed_lines)
 		return (CB_RETURN_FAILURE);
 	if (_parse_cub_file(parsed_lines, data))
 		return (ft_lstclear(&parsed_lines, &free), CB_RETURN_FAILURE);
-	data->map->cells = create_map(data, parsed_lines);
+	data->map->cells = cb_map_create(data, parsed_lines);
 	if (NULL == data->map->cells)
 		return (ft_lstclear(&parsed_lines, &free), CB_RETURN_FAILURE);
 	ft_lstclear(&parsed_lines, &free);

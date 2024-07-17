@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/16 16:43:54 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:12:45 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,6 @@ typedef struct s_map
 	int	height;
 	int	**cells;
 }	t_map;
-
-typedef struct s_rcline
-{
-	int		draw_bottom;
-	int		draw_top;
-	t_img	*texture;
-	t_img	*foreground;
-	double	texture_x_ratio;
-	int		texture_x;
-	int		foreground_x;
-	int		hit;
-	int		pos_x;
-}	t_rcline;
 
 typedef struct s_minimap
 {
@@ -72,26 +59,7 @@ typedef struct s_textures
 	t_img	east;
 	t_img	west;
 	t_img	door;
-	// t_img	*anim_sprite;
-	// int		anim_len;
 }	t_textures;
-
-// typedef struct s_data
-// {
-// 	void		*mlx_ptr;
-// 	void		*win_ptr;
-// 	int			win_width;
-// 	int			win_height;
-// 	int			mouse_x01[2];
-// 	double		player_xydcs[5];
-// 	int			ceil_color;
-// 	int			floor_color;
-// 	int			enable_mouse;
-// 	t_textures	*textures;
-// 	t_sprite	*sprite;
-// 	t_img		img;
-// 	t_map		*map;
-// }	t_data;
 
 typedef struct s_data
 {
@@ -117,18 +85,13 @@ typedef struct s_data
 	t_map		*map;
 }				t_data;
 
-void	cb_data_ptr_destroy(void *data);
-int		cb_data_ptr_ini(t_data *data, char *name);
-void	*cb_data_ptr_win_get(void *data_ptr);
-void	*cb_data_ptr_mlx_get(void *data_ptr);
-void	*cb_data_ptr_img_get(void *data_ptr);
-t_img	*cb_data_img_get(void *data_ptr);
+void	cb_data_destroy(t_data *data);
+int		cb_data_ini(t_data *data, char *name);
 void	cb_data_mouse_dx_ini(t_data *data_ptr);
 int		cb_data_mouse_dx_get(t_data *data_ptr);
-void	cb_player_turn(t_data *data_ptr, int mouse_dx);
-void	cb_player_pos_ini(t_data *data_ptr, double x, double y);
-void	cb_player_angle_ini(t_data *data, char dir);
-void	cb_player_strafe(t_data *data_ptr, double dx, double dy);
-
+void	cb_data_player_turn(t_data *data_ptr, int mouse_dx);
+void	cb_data_player_ini(t_data *data);
+void	cb_data_player_strafe(t_data *data_ptr, double dx, double dy);
+int		cb_data_check_oob(t_data *data, int *xy_map);
 
 #endif

@@ -10,27 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cb_utils.h"
+#include "cb_constants.h"
 #include "cb_data.h"
 #include "cb_interact.h"
-#include <stdio.h> //
 #include <math.h>
 
-
-/* cb_player_pos_ini
- * Sets player position
- */
-void	cb_player_pos_ini(t_data *data, double x, double y)
-{
-	data->player_xydcs[CB_PLAYER_X_INDEX] = x;
-	data->player_xydcs[CB_PLAYER_Y_INDEX] = y;
-}
-
-/* cb_player_pos_ini
+/* cb_data_player_pos_ini
  * Sets player orientation dir is either N/S/E/W
  * Ex: 'N' is North
  */
-void	cb_player_angle_ini(t_data *data, char dir)
+void	cb_data_player_ini(t_data *data)
 {
 	const char		*available_dirs = "WNES";
 	const double	a[5] = {CB_WEST_ANGLE, CB_NORTH_ANGLE, \
@@ -40,18 +29,20 @@ void	cb_player_angle_ini(t_data *data, char dir)
 	const double	s[5] = {0.0, -1.0, 0.0, 1.0, 1.0};
 	int				i;
 
+	data->player_xydcs[CB_PLAYER_X_INDEX] = data->pos_x + CB_PLAYER_START_OFFX;
+	data->player_xydcs[CB_PLAYER_Y_INDEX] = data->pos_y + CB_PLAYER_START_OFFY;
 	i = 0;
-	while ('0' != available_dirs[i] && dir != available_dirs[i])
+	while ('0' != available_dirs[i] && data->dir != available_dirs[i])
 		i++;
 	data->player_xydcs[CB_PLAYER_RAD_INDEX] = a[i];
 	data->player_xydcs[CB_PLAYER_COS_INDEX] = c[i];
 	data->player_xydcs[CB_PLAYER_SIN_INDEX] = s[i];
 }
 
-/* cb_player_turn
+/* cb_data_player_turn
  * Player turn
  */
-void	cb_player_turn(t_data *data, int angle)
+void	cb_data_player_turn(t_data *data, int angle)
 {
 	data->player_xydcs[CB_PLAYER_RAD_INDEX] += CB_MOUSE_SENSIBILITY * angle;
 	data->player_xydcs[CB_PLAYER_COS_INDEX] = \
@@ -60,11 +51,11 @@ void	cb_player_turn(t_data *data, int angle)
 		sinf(data->player_xydcs[CB_PLAYER_RAD_INDEX]);
 }
 
-/* cb_player_strafe
+/* cb_data_player_strafe
  * Player strafe according to player angle
  * Modified if collsion
  */
-void	cb_player_strafe(t_data *data, double dx, double dy)
+void	cb_data_player_strafe(t_data *data, double dx, double dy)
 {
 	double	dxy[2];
 	double	*player_xydcs;
@@ -74,7 +65,8 @@ void	cb_player_strafe(t_data *data, double dx, double dy)
 	dxy[1] = dx * data->player_xydcs[CB_PLAYER_SIN_INDEX] - \
 		dy * data->player_xydcs[CB_PLAYER_COS_INDEX];
 	player_xydcs = data->player_xydcs;
-	cb_interact_wall(data, player_xydcs, dxy);
+	if (CB_BONUS_ENABLED)
+		cb_interact_wall(data, player_xydcs, dxy);
 	player_xydcs[0] += dxy[0];
 	player_xydcs[1] += dxy[1];
 }

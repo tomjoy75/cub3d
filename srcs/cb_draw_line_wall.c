@@ -6,15 +6,16 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 11:22:47 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 17:01:35 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:00:45 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cb_data.h"
-#include "cb_draw.h"
-#include "cb_utils.h"
+#include "cb_graphics.h"
+#include "cb_graphics_utils.h"
+#include "cb_constants.h"
 #include <math.h>
-#include <stdio.h> //
+#include <stdlib.h>
 
 static int	_min(int a, int b)
 {

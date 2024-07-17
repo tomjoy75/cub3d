@@ -6,13 +6,12 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 17:33:03 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 12:17:15 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
 #include "cb_data.h"
-#include <stdio.h> //
 
 /* cb_data_mouse_dx_ini
  * initializes mouse displacement

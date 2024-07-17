@@ -1,21 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cb_texture.h                                       :+:      :+:    :+:   */
+/*   cb_graphics_utils.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 16:11:36 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 16:36:10 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 14:03:47 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CB_TEXTURE_H
-# define CB_TEXTURE_H
+#ifndef CB_GRAPHICS_UTILS_H
+# define CB_GRAPHICS_UTILS_H
 
-#include "cb_data.h"
+typedef struct s_wall_line
+{
+	int		wall_height;
+	double	wall_dy;
+	int		h0;
+	int		h1;
+}	t_wall_line;
 
-int	cb_image_load(t_data *data, t_img *img, char *path);
-int	debug_nswe(t_data *data, void *nswe);
+typedef struct s_rcline
+{
+	int		draw_bottom;
+	int		draw_top;
+	t_img	*texture;
+	t_img	*foreground;
+	double	texture_x_ratio;
+	int		texture_x;
+	int		foreground_x;
+	int		hit;
+	int		pos_x;
+}	t_rcline;
+
+void	cb_draw_line(t_data *data, t_img *img, t_rcline *line);
+void	cb_draw_line_wall(t_data *data, t_img *img, t_rcline *line);
 
 #endif

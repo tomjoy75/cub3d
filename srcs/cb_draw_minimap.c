@@ -6,16 +6,14 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:38:36 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/15 17:03:16 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 13:50:56 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cb_draw.h"
+#include "cb_graphics.h"
 #include "cb_data.h"
-#include "cb_utils.h"
+#include "cb_constants.h"
 #include <math.h>
-#include <stdio.h> //
-#include <stdlib.h> //
 
 int	_get_color(t_data *data, int *xy)
 {

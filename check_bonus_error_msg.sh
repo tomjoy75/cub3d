@@ -3,7 +3,9 @@
 # Répertoire contenant les fichiers .cub
 MAPS_DIR="maps"
 # Fichier texture du sprite 
-SPRITE="./textures/sprite.xpm"
+SPRITE="./data/sprite.xpm"
+# Fichier texture du sprite 
+DOOR="./data/door.xpm"
 # Fichier exécutable
 EXECUTABLE="./cub3D"
 # Fichier sans permission
@@ -90,39 +92,45 @@ else
   echo "No errors detected for $map"
 fi
 echo "--------------------------------------"
-echo -e "\n----------CHECK SPRITE_TEXTURE-----------\n"
+echo -e "\n----------CHECK SPRITES_TEXTURE-----------\n"
 
-# Vérifier que le fichier sprite existe
+# Vérifier que les fichiers sprite et door existent
 if [ ! -f "$SPRITE" ]; then
   echo "Executable $SPRITE does not exist."
   exit 1
 fi
+if [ ! -f "$DOOR" ]; then
+  echo "Executable $DOOR does not exist."
+  exit 1
+fi
 
-# Vérifier que le fichier sprite a les droits d'acces
+# Vérifier que le fichier sprite et door ont les droits d'acces
 echo "Checking sprite file permissions"
 if [ ! -r "$SPRITE" ]; then
   echo "Sprite file $SPRITE is not readable."
   exit 1
 fi
-if [ ! -w "$SPRITE" ]; then
-  echo "Sprite file $SPRITE is not writable."
-  exit 1
-fi
-if [ ! -x "$SPRITE" ]; then
-  echo "Sprite file $SPRITE is not executable."
-  exit 1
-fi
 echo "Sprite file permissions are correct."
+echo "Checking door file permissions"
+if [ ! -r "$DOOR" ]; then
+  echo "Sprite file $DOOR is not readable."
+  exit 1
+fi
+echo "Door file permissions are correct."
 echo "--------------------------------------"
 
 # Vérifier que le fichier est bien un fichier .xpm
-file_output=$(file "$TEXTURE_PATH")
+file_output=$(file "$SPRITE")
 if [[ "$file_output" != *"X pixmap image"* ]]; then
-  echo "Texture file $TEXTURE_PATH is not a valid XPM file."
+  echo "Texture file $SPRITE is not a valid XPM file."
+  continue
+fi
+file_output=$(file "$DOOR")
+if [[ "$file_output" != *"X pixmap image"* ]]; then
+  echo "Texture file $DOOR is not a valid XPM file."
   continue
 fi
 
-# Vérifier que le fichier xpm du sprite est conforme
 
 echo -e "\n------------CHECK ALL THE MAP-----------\n"
 
