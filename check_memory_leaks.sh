@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Répertoire contenant les fichiers .cub
-MAPS_DIR="tests/maps"
+MAPS_DIR="maps"
 #MAPS_DIR="maps"
 # Fichier exécutable
-EXECUTABLE="./a.out"
+EXECUTABLE="./cub3D"
 
 # Vérifier que le répertoire existe
 if [ ! -d "$MAPS_DIR" ]; then
