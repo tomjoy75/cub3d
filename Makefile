@@ -6,7 +6,7 @@
 #    By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/17 15:25:01 by jerperez          #+#    #+#              #
-#    Updated: 2024/07/17 17:00:49 by jerperez         ###   ########.fr        #
+#    Updated: 2024/07/17 17:13:40 by jerperez         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ OBJDIR		= obj
 LIBFT_DIR	= ./libft
 LIBFT		= $(LIBFT_DIR)/libft.a
 MLX_DLINK	= https://cdn.intra.42.fr/document/document/26097/minilibx-linux.tgz
+MLX_GIT		= https://github.com/42Paris/minilibx-linux.git
 MLX_DIR		= minilibx-linux
 MLX_TAR		= $(MLX_DIR).tgz
 MLX			= $(MLX_DIR)/libmlx.a
