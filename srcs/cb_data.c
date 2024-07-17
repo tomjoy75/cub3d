@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/17 14:56:49 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 17:31:46 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	cb_data_check_oob(t_data *data, int *xy_map)
 
 void	cb_data_destroy(t_data *data)
 {
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	if (NULL != data->win_ptr)
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	data->win_ptr = NULL;
 	cb_image_destroy(data, &data->img);
 	if (NULL != data->textures)
