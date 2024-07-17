@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 10:23:11 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/17 17:06:05 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 20:12:14 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <X11/X.h>
 #include <stdlib.h>
 
-static int	_keypress_bonus(int keysym, t_data *data)
+static int	_is_keypress_mandatory(int keysym, t_data *data)
 {
 	if (XK_Escape == keysym)
 	{
@@ -37,40 +37,30 @@ static int	_keypress_bonus(int keysym, t_data *data)
 		cb_data_player_strafe(data, -CB_PLAYER_SPEED, 0.0);
 	else if (XK_d == keysym || XK_d == keysym)
 		cb_data_player_strafe(data, 0.0, -CB_PLAYER_SPEED);
-	else if (XK_m == keysym || XK_M == keysym)
-		data->show_minimap = !(data->show_minimap);
 	else if (XK_Left == keysym)
 		cb_data_player_turn(data, -CB_PLAYER_LR_TURN);
 	else if (XK_Right == keysym)
 		cb_data_player_turn(data, CB_PLAYER_LR_TURN);
-	else if (XK_space == keysym)
-		cb_interact_door(data);
-	cb_rc(data, &data->img);
-	cb_render(data);
-	return (CB_RETURN_SUCCESS);
+	else
+		return (0);
+	return (1);
 }
 
 static int	_keypress(int keysym, t_data *data)
 {
-	if (XK_Escape == keysym)
-	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		data->win_ptr = NULL;
-		exit(EXIT_SUCCESS);
-	}
-	else if (XK_w == keysym || XK_W == keysym)
-		cb_data_player_strafe(data, CB_PLAYER_SPEED, 0.0);
-	else if (XK_a == keysym || XK_A == keysym)
-		cb_data_player_strafe(data, 0.0, CB_PLAYER_SPEED);
-	else if (XK_s == keysym || XK_S == keysym)
-		cb_data_player_strafe(data, -CB_PLAYER_SPEED, 0.0);
-	else if (XK_d == keysym || XK_d == keysym)
-		cb_data_player_strafe(data, 0.0, -CB_PLAYER_SPEED);
-	else if (XK_Left == keysym)
-		cb_data_player_turn(data, -CB_PLAYER_LR_TURN);
-	else if (XK_Right == keysym)
-		cb_data_player_turn(data, CB_PLAYER_LR_TURN);
+	if (_is_keypress_mandatory(keysym, data))
+		;
+	else if (!CB_BONUS_ENABLED)
+		return (CB_RETURN_SUCCESS);
+	else if (XK_m == keysym || XK_M == keysym)
+		data->show_minimap = !(data->show_minimap);
+	else if (XK_space == keysym)
+		cb_interact_door(data);
+	else
+		return (CB_RETURN_SUCCESS);
 	cb_rc(data, &data->img);
+	if (CB_BONUS_ENABLED && data->show_minimap)
+		cb_draw_minimap(data);
 	cb_render(data);
 	return (CB_RETURN_SUCCESS);
 }
@@ -119,14 +109,9 @@ void	cb_start_game(t_data *data)
 	cb_data_player_ini(data);
 	cb_rc(data, &data->img);
 	cb_render(data);
+	mlx_hook(win_ptr, KeyPress, KeyPressMask, &_keypress, data);
 	if (CB_BONUS_ENABLED)
-	{
-		mlx_hook(win_ptr, KeyPress, KeyPressMask, &_keypress_bonus, data);
 		mlx_loop_hook(mlx_ptr, &_update_bonus, data);
-	}
 	else
-	{
-		mlx_hook(win_ptr, KeyPress, KeyPressMask, &_keypress, data);
 		mlx_loop_hook(mlx_ptr, &_update, data);
-	}
 }
