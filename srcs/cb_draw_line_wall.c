@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 11:22:47 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/17 14:00:45 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/17 20:23:51 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	_max(int a, int b)
 void	_wall_door(t_img *img, t_rcline *line, t_wall_line *wall_line)
 {
 	const double	foreground_dy = \
-		line->foreground->height / floorf(wall_line->wall_height);
+		(double)(line->foreground->height) / (double)(wall_line->wall_height);
 	int				color;
 	int				h;
 
@@ -86,7 +86,8 @@ void	cb_draw_line_wall(t_data *data, t_img *img, t_rcline *line)
 	wall_line.h0 = -_min(0, line->draw_top);
 	wall_line.h1 = \
 		wall_line.wall_height - _max(0, line->draw_bottom - data->win_height);
-	wall_line.wall_dy = line->texture->height / floorf(wall_line.wall_height);
+	wall_line.wall_dy = (double)(line->texture->height) / \
+		(double)(wall_line.wall_height);
 	if (NULL == line->foreground)
 		_wall_no_door(img, line, &wall_line);
 	else
