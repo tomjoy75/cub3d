@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 13:03:20 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/17 16:17:58 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/18 14:21:59 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	_get_wall(t_data *data, t_ray *ray, t_rcline *line)
 	else
 		line_height = (int)floorf(h / ray->plane_distance);
 	line->draw_top = -line_height / 2 + h / 2;
-	line->draw_bottom = line_height / 2 + h / 2;
+	line->draw_bottom = +line_height / 2 + h / 2;
 }
 
 static void	_get_texture_x(\
@@ -55,17 +55,17 @@ static void	_get_texture(t_data *data, t_ray *ray, t_rcline *line)
 	{
 		x_ratio = ray->pos_y + ray->plane_distance * ray->v_ray_y;
 		if (ray->map_dx > 0)
-			line->texture = &data->textures->south;
+			line->texture = &data->textures->east;
 		else
-			line->texture = &data->textures->north;
+			line->texture = &data->textures->west;
 	}
 	else
 	{
 		x_ratio = ray->pos_x + ray->plane_distance * ray->v_ray_x;
 		if (ray->map_dy > 0)
-			line->texture = &data->textures->east;
+			line->texture = &data->textures->south;
 		else
-			line->texture = &data->textures->west;
+			line->texture = &data->textures->north;
 	}
 	_get_texture_x(data, ray, line, x_ratio - floorf(x_ratio));
 }
