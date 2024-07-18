@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 10:23:11 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/18 12:32:04 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:16:42 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ static int	_is_keypress_mandatory(int keysym, t_data *data)
 {
 	if (XK_Escape == keysym)
 	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		data->win_ptr = NULL;
+		cb_data_destroy(data);
 		exit(EXIT_SUCCESS);
 	}
 	else if (XK_w == keysym || XK_W == keysym)

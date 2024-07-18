@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:18:48 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/17 15:59:25 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/18 12:47:40 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ static int	_run_program(char *path)
 	t_textures	textures;
 	t_sprite	sprite;
 
+	if (CB_BONUS_ENABLED)
+		printf("cub3D: bonus\n");
+	else
+		printf("cub3D: mandatory\n");
 	if (_ini(&data, &map, &textures))
 		return (cb_data_destroy(&data), EXIT_FAILURE);
 	if (cb_parse_file(path, &data))

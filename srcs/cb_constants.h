@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/17 19:53:56 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/18 12:36:08 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 // Window
 # define CB_WIN_NAME "cub3D"
-# define CB_WIN_W 600 // pixels
-# define CB_WIN_H 300 // pixels
+# define CB_WIN_W 800 //600 // pixels
+# define CB_WIN_H 400 //300 // pixels
 // SUCCESS
 # define CB_RETURN_SUCCESS 0
 # define CB_RETURN_FAILURE 1
