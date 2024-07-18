@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:52:25 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/17 16:12:45 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/18 12:32:30 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_textures
 
 typedef struct s_data
 {
+	int			update_win;
 	int			show_minimap;
 	char		*no_text;
 	char		*so_text;	

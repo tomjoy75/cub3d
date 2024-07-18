@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:38:36 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/17 13:50:56 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/18 12:22:58 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	cb_draw_minimap(t_data *data)
 	_draw_map(data);
 	player_xydcs = data->player_xydcs;
 	xy[0] = (int)floorf(\
-		2.0 * CB_MAP_TILE_SIZE * player_xydcs[0] - CB_MAP_TILE_SIZE / 2.0);
+		2.0 * CB_MAP_TILE_SIZE * player_xydcs[0]);
 	xy[1] = (int)floorf(\
-		2.0 * CB_MAP_TILE_SIZE * player_xydcs[1] - CB_MAP_TILE_SIZE / 2.0);
+		2.0 * CB_MAP_TILE_SIZE * player_xydcs[1]);
 	cb_sprite_draw(data, player_xydcs, xy);
 }

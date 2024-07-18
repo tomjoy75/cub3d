@@ -6,7 +6,7 @@
 /*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 10:23:11 by jerperez          #+#    #+#             */
-/*   Updated: 2024/07/17 20:12:14 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/18 13:16:42 by jerperez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ static int	_is_keypress_mandatory(int keysym, t_data *data)
 {
 	if (XK_Escape == keysym)
 	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		data->win_ptr = NULL;
+		cb_data_destroy(data);
 		exit(EXIT_SUCCESS);
 	}
 	else if (XK_w == keysym || XK_W == keysym)
@@ -58,10 +57,7 @@ static int	_keypress(int keysym, t_data *data)
 		cb_interact_door(data);
 	else
 		return (CB_RETURN_SUCCESS);
-	cb_rc(data, &data->img);
-	if (CB_BONUS_ENABLED && data->show_minimap)
-		cb_draw_minimap(data);
-	cb_render(data);
+	data->update_win = 1;
 	return (CB_RETURN_SUCCESS);
 }
 
@@ -69,6 +65,12 @@ static int	_update(t_data *data)
 {
 	if (NULL == data->win_ptr)
 		return (CB_RETURN_FAILURE);
+	if (data->update_win)
+	{
+		cb_rc(data, &data->img);
+		cb_render(data);
+		data->update_win = 0;
+	}
 	return (CB_RETURN_SUCCESS);
 }
 
@@ -84,12 +86,17 @@ static int	_update_bonus(t_data *data)
 		if (0 != dx)
 		{
 			cb_data_player_turn(data, dx);
-			cb_rc(data, &data->img);
+			data->update_win = 1;
 		}
-		if (data->show_minimap)
+		if (data->update_win)
+			cb_rc(data, &data->img);
+		if (CB_BONUS_ENABLED && data->show_minimap)
 			cb_draw_minimap(data);
-		if (0 != dx || data->show_minimap)
+		if (0 != dx || data->update_win || data->show_minimap)
+		{
 			cb_render(data);
+			data->update_win = 0;
+		}
 	}
 	return (CB_RETURN_SUCCESS);
 }
