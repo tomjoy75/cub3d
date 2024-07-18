@@ -6,7 +6,7 @@
 /*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:07:22 by tjoyeux           #+#    #+#             */
-/*   Updated: 2024/07/17 18:24:58 by tjoyeux          ###   ########.fr       */
+/*   Updated: 2024/07/18 12:31:59 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int	is_whitespace(char c)
 int	is_walkable(int tile)
 {
 	return (tile == CB_TILE_FLOOR || tile == CB_TILE_DOOR_OPEN);
+}
+
+int	can_be_on_border(int tile)
+{
+	return (tile == CB_TILE_EMPTY || tile == CB_TILE_WALL);
 }
 
 void	crop_end(char *str)

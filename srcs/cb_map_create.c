@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cb_map_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jerperez <jerperez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjoyeux <tjoyeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 22:38:17 by joyeux            #+#    #+#             */
-/*   Updated: 2024/07/17 14:28:55 by jerperez         ###   ########.fr       */
+/*   Updated: 2024/07/18 12:36:17 by tjoyeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	_wrong_elem_around(int **map_temp, t_data *data, int i, int j)
 	if (i == 0 || j == 0 || i == data->map->width - 1
 		|| j == data->map->height - 1)
 	{
-		if (is_walkable(map_temp[j][i]))
+		if (!can_be_on_border(map_temp[j][i]))
 			return (1);
 	}
 	else
@@ -68,10 +68,10 @@ static int	_wrong_elem_around(int **map_temp, t_data *data, int i, int j)
 				map_temp[j][i + 1] == CB_TILE_EMPTY))
 			return (1);
 		else if (map_temp[j][i] == CB_TILE_EMPTY && (\
-			is_walkable(map_temp[j][i - 1]) || \
-			is_walkable(map_temp[j][i + 1]) || \
-			is_walkable(map_temp[j - 1][i]) || \
-			is_walkable(map_temp[j + 1][i])))
+			!can_be_on_border(map_temp[j][i - 1]) || \
+			!can_be_on_border(map_temp[j][i + 1]) || \
+			!can_be_on_border(map_temp[j - 1][i]) || \
+			!can_be_on_border(map_temp[j + 1][i])))
 			return (1);
 	}
 	return (0);
