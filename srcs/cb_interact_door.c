@@ -24,9 +24,9 @@ void	_change_tile(t_data *data, double *xy, double *dxy, int tile)
 	xy_player[0] = (int)floorf(xy[0]);
 	xy_player[1] = (int)floorf(xy[1]);
 	xy_collision[0] = (int)floorf(\
-		xy[0] + CB_COLLISION_TOL * xy[CB_PLAYER_COS_INDEX]);
+		xy[0] + 0.5 * CB_COLLISION_TOL * xy[CB_PLAYER_COS_INDEX]);
 	xy_collision[1] = (int)floorf(\
-		xy[1] + CB_COLLISION_TOL * xy[CB_PLAYER_SIN_INDEX]);
+		xy[1] + 0.5 * CB_COLLISION_TOL * xy[CB_PLAYER_SIN_INDEX]);
 	xy_map[0] = (int)floorf(xy[0] + dxy[0]);
 	xy_map[1] = (int)floorf(xy[1] + dxy[1]);
 	if ((xy_player[0] == xy_map[0] && xy_player[1] == xy_map[1]) || \
