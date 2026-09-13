@@ -98,12 +98,48 @@ static int	_xpm_dimensions(const char *path, int *w, int *h)
 	return (-1);
 }
 
+/* Loads rgba/<name>.rgba if the build embedded one: an int32 width, an int32
+ * height, then B,G,R,X bytes — MiniLibX's own layout, so the renderer reads it
+ * with no conversion. Produced by wasm/textures.py, which decodes the .xpm and
+ * downscales it. Returns 0 when there is no such file, so the caller falls
+ * back to the synthetic pattern. */
+static int	_load_rgba(const char *path, t_shim_img *img, int *w, int *h)
+{
+	char	alt[512];
+	FILE	*f;
+	size_t	n;
+	char	*dot;
+
+	snprintf(alt, sizeof(alt), "rgba/%s", strrchr(path, '/') + 1);
+	dot = strrchr(alt, '.');
+	if (NULL == dot)
+		return (0);
+	strcpy(dot, ".rgba");
+	f = fopen(alt, "rb");
+	if (NULL == f)
+		return (0);
+	if (1 != fread(w, sizeof(int), 1, f) || 1 != fread(h, sizeof(int), 1, f))
+		return (fclose(f), 0);
+	img->addr = malloc((size_t)*w * *h * 4);
+	if (NULL == img->addr)
+		return (fclose(f), 0);
+	n = fread(img->addr, 4, (size_t)*w * *h, f);
+	fclose(f);
+	img->w = *w;
+	img->h = *h;
+	return (n == (size_t)*w * *h);
+}
+
 void	*mlx_xpm_file_to_image(void *mlx, char *path, int *w, int *h)
 {
 	t_shim_img	*img;
 	int			*px;
 	long		i;
 
+	img = calloc(1, sizeof(t_shim_img));
+	if (img && _load_rgba(path, img, w, h))
+		return (img);
+	free(img);
 	if (_xpm_dimensions(path, w, h))
 		return (fprintf(stderr, "xpm: no dimensions in %s\n", path), NULL);
 	img = mlx_new_image(mlx, *w, *h);

@@ -31,6 +31,7 @@ emcc -O3 -flto $SRC \
 	-s MODULARIZE=1 -s EXPORT_NAME=Cub3d \
 	--embed-file maps \
 	--embed-file data \
+	--embed-file rgba \
 	-o "$OUT"
 
 ls -l "${OUT%.js}.wasm" "$OUT"
