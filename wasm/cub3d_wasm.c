@@ -67,6 +67,17 @@ int	cw_init(char *path)
 	return (CB_RETURN_SUCCESS);
 }
 
+/* Tears the world down so cw_init can build another one. Map switching needs
+ * this: the map grid, the textures and the framebuffer are all per-map
+ * allocations, and cb_data_destroy already frees exactly that set. */
+EMSCRIPTEN_KEEPALIVE
+void	cw_destroy(void)
+{
+	if (NULL != g_data.mlx_ptr)
+		cb_data_destroy(&g_data);
+	ft_memset(&g_data, 0, sizeof(t_data));
+}
+
 EMSCRIPTEN_KEEPALIVE
 char	*cw_buffer(void)
 {
