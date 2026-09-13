@@ -76,7 +76,7 @@ MiniLibX is X11-based, so this wants Linux.
 |---|---|
 | `main` | the development history — 73 commits, June to July 2024 — plus the test scripts, the invalid-map fixtures and the subject PDFs. None of that was part of the hand-in. |
 | `submitted` | the tree exactly as it was graded. It diverges from `main`: the last fixes (wall texture orientation, sprite timing, minimap redraw) never got pushed here, and the headers moved into `includes/`. |
-| `wasm` | a WebAssembly port, in progress, so the engine runs in a browser. |
+| `wasm` | reserved for a WebAssembly port, so the engine runs in a browser. Branched from `submitted`; nothing ported yet. |
 
 `main` is kept as the default because the history is the more useful thing to land on. The
 graded artifact is on `submitted` and is not edited.
