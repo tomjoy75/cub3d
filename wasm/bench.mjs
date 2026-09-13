@@ -20,3 +20,6 @@ const walking = M.ccall('cw_bench_walking', 'number', ['number'], [frames]);
 
 console.log(JSON.stringify({ map, w, h, frames,
   still_ms: +still.toFixed(3), walking_ms: +walking.toFixed(3) }));
+// Reports cw_height alongside the timings, because a -D override that the
+// header silently wins over is invisible otherwise: the build renders 400,
+// reports 600 in the table, and the numbers look merely optimistic.

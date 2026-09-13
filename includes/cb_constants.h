@@ -15,8 +15,15 @@
 
 // Window
 # define CB_WIN_NAME "cub3D"
-# define CB_WIN_W 800 //600 // pixels
-# define CB_WIN_H 400 //300 // pixels
+/* Guarded so the WebAssembly build can set the render size from the command
+ * line (wasm/build.sh W= H=). Unguarded, -D CB_WIN_H=600 is silently
+ * overridden by this header and the build renders 400 while reporting 600. */
+# ifndef CB_WIN_W
+#  define CB_WIN_W 800 //600 // pixels
+# endif
+# ifndef CB_WIN_H
+#  define CB_WIN_H 400 //300 // pixels
+# endif
 // SUCCESS
 # define CB_RETURN_SUCCESS 0
 # define CB_RETURN_FAILURE 1
