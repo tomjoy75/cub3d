@@ -1,0 +1,7 @@
+# Build output. Artifacts are vendored into the portfolio repo by ticket 06,
+# not committed here.
+*.js
+*.wasm
+*.data
+!bench.mjs
+!verify.mjs
