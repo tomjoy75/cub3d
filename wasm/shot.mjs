@@ -21,8 +21,8 @@ const p = M.ccall('cw_buffer', 'number', [], []);
 const src = M.HEAPU8.subarray(p, p + w * h * 4);
 const raw = Buffer.alloc(h * (1 + w * 3));
 for (let y = 0, o = 0; y < h; y++) { raw[o++] = 0;
-  for (let x = 0; x < w; x++) { const i = (y * w + x) * 4;   // stored B,G,R,X
-    raw[o++] = src[i + 2]; raw[o++] = src[i + 1]; raw[o++] = src[i]; } }
+  for (let x = 0; x < w; x++) { const i = (y * w + x) * 4;   // stored R,G,B,X
+    raw[o++] = src[i]; raw[o++] = src[i + 1]; raw[o++] = src[i + 2]; } }
 const ihdr = Buffer.alloc(13); ihdr.writeUInt32BE(w, 0); ihdr.writeUInt32BE(h, 4); ihdr[8] = 8; ihdr[9] = 2;
 writeFileSync(`/tmp/shots/${mapName}.png`, Buffer.concat([
   Buffer.from([137,80,78,71,13,10,26,10]), chunk('IHDR', ihdr),

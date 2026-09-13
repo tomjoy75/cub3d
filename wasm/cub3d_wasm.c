@@ -44,6 +44,18 @@ static int	_bonus(void)
 	return (CB_RETURN_SUCCESS);
 }
 
+/* cb_color_set packs 0x00RRGGBB, and cb_draw_pix writes an int low byte
+ * first, so that lands in memory as B,G,R,X. The textures are stored R,G,B,X
+ * so the framebuffer can go straight into ImageData; these two colours are
+ * parsed from the .cub by original code, so they are swapped to match here
+ * rather than by editing the parser. */
+static int	_to_rgba_order(int c)
+{
+	if (0 > c)
+		return (c);
+	return (((c & 0xFF) << 16) | (c & 0xFF00) | ((c >> 16) & 0xFF));
+}
+
 EMSCRIPTEN_KEEPALIVE
 int	cw_init(char *path)
 {
@@ -59,6 +71,8 @@ int	cw_init(char *path)
 		return (CB_RETURN_FAILURE);
 	if (cb_parse_file(path, &g_data))
 		return (CB_RETURN_FAILURE);
+	g_data.floor_color = _to_rgba_order(g_data.floor_color);
+	g_data.ceil_color = _to_rgba_order(g_data.ceil_color);
 	if (cb_data_ini(&g_data, CB_WIN_NAME))
 		return (CB_RETURN_FAILURE);
 	if (CB_BONUS_ENABLED && _bonus())
@@ -96,11 +110,53 @@ int	cw_height(void)
 	return (g_data.win_height);
 }
 
+/* The player's position in map coordinates, so the page can mark where the
+ * visitor is standing in the .cub source it is showing alongside. The whole
+ * point of the demo is that the text and the world are the same thing. */
+EMSCRIPTEN_KEEPALIVE
+double	cw_player_x(void)
+{
+	return (g_data.player_xydcs[CB_PLAYER_X_INDEX]);
+}
+
+EMSCRIPTEN_KEEPALIVE
+double	cw_player_y(void)
+{
+	return (g_data.player_xydcs[CB_PLAYER_Y_INDEX]);
+}
+
 EMSCRIPTEN_KEEPALIVE
 void	cw_key(int keysym)
 {
 	if (NULL != g_key_hook)
 		g_key_hook(keysym, g_key_param);
+}
+
+void	cw_frame(void);
+
+/* One tick, then the alpha channel filled in.
+ *
+ * The renderer leaves the fourth byte at zero, which ImageData reads as fully
+ * transparent - the canvas would show nothing at all. It cannot simply be
+ * written as 0xFF upstream: cb_draw_line_wall compares a sampled texel against
+ * CB_SPRITE_TRANSPARENT_COLOR (0x000000) to decide what shows through a door,
+ * so an alpha bit set in the texture data would break transparency. Filling it
+ * afterwards keeps that test intact. */
+EMSCRIPTEN_KEEPALIVE
+void	cw_frame_rgba(void)
+{
+	unsigned int	*px;
+	long			i;
+	long			n;
+
+	cw_frame();
+	px = (unsigned int *)g_data.img.addr;
+	if (NULL == px)
+		return ;
+	n = (long)g_data.win_width * g_data.win_height;
+	i = 0;
+	while (i < n)
+		px[i++] |= 0xFF000000u;
 }
 
 /* One tick of what mlx_loop_hook would have driven. */

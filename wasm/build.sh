@@ -25,7 +25,7 @@ emcc -O3 -flto $SRC \
 	-I includes -I libft -I wasm \
 	-D CB_BONUS_ENABLED=$BONUS \
 	-D CB_WIN_W=$W -D CB_WIN_H=$H \
-	-s EXPORTED_FUNCTIONS='["_cw_init","_cw_destroy","_cw_frame","_cw_key","_cw_buffer","_cw_width","_cw_height","_cw_bench","_cw_bench_walking","_malloc","_free"]' \
+	-s EXPORTED_FUNCTIONS='["_cw_init","_cw_destroy","_cw_frame","_cw_frame_rgba","_cw_key","_cw_buffer","_cw_width","_cw_height","_cw_bench","_cw_bench_walking","_malloc","_free"]' \
 	-s EXPORTED_RUNTIME_METHODS='["ccall","cwrap","HEAPU8"]' \
 	-s ALLOW_MEMORY_GROWTH=1 \
 	-s MODULARIZE=1 -s EXPORT_NAME=Cub3d \

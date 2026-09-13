@@ -1,0 +1,5 @@
+# Build output; regenerate with: python3 wasm/textures.py && sh wasm/build_web.sh
+cub3d.js
+cub3d.wasm
+tex/
+maps/
