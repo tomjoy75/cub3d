@@ -1,0 +1,12 @@
+NO ./data/wall_1.xpm
+SO ./data/wall_1.xpm
+WE ./data/wall_1.xpm
+EA ./data/wall_1.xpm
+
+F 0, 0, 0
+
+11111
+10001
+10N01
+10001
+11111
