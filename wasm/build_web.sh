@@ -5,6 +5,12 @@
 # measuring and useless for shipping - it produces a 26 MB .wasm. Here the
 # page fetches the .cub and the textures itself and writes them into the
 # virtual filesystem before cw_init, so the binary carries only code.
+#
+# MODULARIZE without EXPORT_ES6 on purpose: the portfolio's demo components
+# load their runtime with a <script> tag and call a global factory, so this
+# has to define window.createCub3d the way Fract-ol's build defines
+# createFractol. EXPORT_ES6 emits an ES module instead, and the component's
+# loader silently gets nothing.
 set -e
 W=${W:-800}; H=${H:-600}; OUT=${OUT:-web/cub3d.js}
 mkdir -p "$(dirname "$OUT")"
@@ -15,6 +21,6 @@ emcc -O3 -flto $(ls srcs/*.c) wasm/mlx_shim.c wasm/cub3d_wasm.c $(ls libft/srcs/
 	-s EXPORTED_FUNCTIONS='["_cw_init","_cw_destroy","_cw_frame","_cw_frame_rgba","_cw_key","_cw_player_x","_cw_player_y","_cw_buffer","_cw_width","_cw_height","_malloc","_free"]' \
 	-s EXPORTED_RUNTIME_METHODS='["ccall","cwrap","FS","HEAPU8"]' \
 	-s ALLOW_MEMORY_GROWTH=1 -s FORCE_FILESYSTEM=1 \
-	-s MODULARIZE=1 -s EXPORT_ES6=1 -s EXPORT_NAME=Cub3d -s ENVIRONMENT=web \
+	-s MODULARIZE=1 -s EXPORT_NAME=createCub3d -s ENVIRONMENT=web \
 	-o "$OUT"
 ls -l "${OUT%.js}.wasm" "$OUT"
